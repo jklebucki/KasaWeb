@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Kasa.Web/Kasa.Web.csproj",
+                "${workspaceFolder}/src/Kasa.Web/Kasa.Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -19,7 +19,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/Kasa.Web/Kasa.Web.csproj",
+                "${workspaceFolder}/src/Kasa.Web/Kasa.Web.csproj",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -33,7 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/Kasa.Web/Kasa.Web.csproj"
+                "${workspaceFolder}/src/Kasa.Web/Kasa.Web.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
