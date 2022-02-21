@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Core", "Kasa.Core\Kasa.Core.csproj", "{CCEE42D6-DE7C-45C4-BCC4-20A86D301A34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Core", "src\Kasa.Core\Kasa.Core.csproj", "{CCEE42D6-DE7C-45C4-BCC4-20A86D301A34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Infrastructure", "Kasa.Infrastructure\Kasa.Infrastructure.csproj", "{14527318-6B37-4AAE-8933-A4697C8E1288}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Infrastructure", "src\Kasa.Infrastructure\Kasa.Infrastructure.csproj", "{14527318-6B37-4AAE-8933-A4697C8E1288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Api", "Kasa.Api\Kasa.Api.csproj", "{D6D8B303-A0C4-45E7-9826-219984A1F15F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Api", "src\Kasa.Api\Kasa.Api.csproj", "{D6D8B303-A0C4-45E7-9826-219984A1F15F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Web", "Kasa.Web\Kasa.Web.csproj", "{EB76DB0F-5FE3-412A-BBCB-6AD1AD435AE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Web", "src\Kasa.Web\Kasa.Web.csproj", "{EB76DB0F-5FE3-412A-BBCB-6AD1AD435AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
