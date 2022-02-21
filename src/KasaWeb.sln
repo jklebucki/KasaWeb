@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Core", "Kasa.Core\Kasa.Core.csproj", "{CCEE42D6-DE7C-45C4-BCC4-20A86D301A34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Infrastructure", "Kasa.Infrastructure\Kasa.Infrastructure.csproj", "{14527318-6B37-4AAE-8933-A4697C8E1288}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Api", "Kasa.Api\Kasa.Api.csproj", "{D6D8B303-A0C4-45E7-9826-219984A1F15F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kasa.Web", "Kasa.Web\Kasa.Web.csproj", "{EB76DB0F-5FE3-412A-BBCB-6AD1AD435AE0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCEE42D6-DE7C-45C4-BCC4-20A86D301A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCEE42D6-DE7C-45C4-BCC4-20A86D301A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCEE42D6-DE7C-45C4-BCC4-20A86D301A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCEE42D6-DE7C-45C4-BCC4-20A86D301A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14527318-6B37-4AAE-8933-A4697C8E1288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14527318-6B37-4AAE-8933-A4697C8E1288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14527318-6B37-4AAE-8933-A4697C8E1288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14527318-6B37-4AAE-8933-A4697C8E1288}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6D8B303-A0C4-45E7-9826-219984A1F15F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6D8B303-A0C4-45E7-9826-219984A1F15F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6D8B303-A0C4-45E7-9826-219984A1F15F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6D8B303-A0C4-45E7-9826-219984A1F15F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB76DB0F-5FE3-412A-BBCB-6AD1AD435AE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB76DB0F-5FE3-412A-BBCB-6AD1AD435AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB76DB0F-5FE3-412A-BBCB-6AD1AD435AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB76DB0F-5FE3-412A-BBCB-6AD1AD435AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
