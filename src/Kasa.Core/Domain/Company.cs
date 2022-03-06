@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kasa.Core.Domain
+﻿namespace Kasa.Core.Domain
 {
-    public class Company: Entity
+    public class Company : Entity
     {
     }
 }

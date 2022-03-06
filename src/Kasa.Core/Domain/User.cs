@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kasa.Core.Domain
+﻿namespace Kasa.Core.Domain
 {
     public class User : Entity
     {
+        public int CompanyId { get; protected set; }
         public string Role { get; protected set; }
         public string Name { get; protected set; }
         public string Email { get; protected set; }
@@ -16,10 +11,16 @@ namespace Kasa.Core.Domain
         public DateTime UpdatedAt { get; protected set; }
 
         private readonly IEnumerable<string> _roles;
+        private readonly IEnumerable<int> _companiesIds;
 
-        public User(int id, string role, string name, string email, string password, IEnumerable<string> roles)
+        public User()
+        {
+
+        }
+        public User(int id, int companyId, string role, string name, string email, string password, IEnumerable<string> roles, IEnumerable<int> companiesIds)
         {
             Id = id;
+            SetCompanyId(companyId);
             SetRole(role);
             SetName(name);
             SetEmail(email);
@@ -42,6 +43,15 @@ namespace Kasa.Core.Domain
             }
             Role = role;
         }
+        private void SetCompanyId(int companyId)
+        {
+            if (!_companiesIds.Contains(companyId))
+            {
+                throw new Exception($"Company with id: '{companyId}' does not exist.");
+            }
+            CompanyId = companyId;
+        }
+
         private void SetName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
