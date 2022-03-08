@@ -1,6 +1,4 @@
 ﻿using Kasa.Core.Extensions;
-using System.Net.Mail;
-using System.Text.RegularExpressions;
 
 namespace Kasa.Core.Domain
 {
