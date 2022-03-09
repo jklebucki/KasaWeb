@@ -69,13 +69,13 @@ namespace Kasa.Core.Domain
         }
         private void SetCompanyEmail(string companyEmail)
         {
-            var result = EntityExtensions.CheckIfEmailIsValid(companyEmail);
-            if (result)
+            if (this.CheckIfEmailIsValid(companyEmail))
                 CompanyEmail = companyEmail;
             else
                 throw new Exception($"Email {companyEmail} is not valid.");
 
         }
+
         private void SetCompanyPhone(string companyPhone)
         {
             CompanyPhone = companyPhone;

@@ -1,4 +1,5 @@
-﻿namespace Kasa.Core.Domain
+﻿using Kasa.Core.Extensions;
+namespace Kasa.Core.Domain
 {
     public class User : Entity
     {
@@ -12,14 +13,10 @@
 
         private readonly IEnumerable<string> _roles;
         private readonly IEnumerable<int> _companiesIds;
-
-        public User()
+        public User(int companyId, string role, string name, string email, string password, IEnumerable<string> roles, IEnumerable<int> companiesIds)
         {
-
-        }
-        public User(int id, int companyId, string role, string name, string email, string password, IEnumerable<string> roles, IEnumerable<int> companiesIds)
-        {
-            Id = id;
+            _roles = roles;
+            _companiesIds = companiesIds;
             SetCompanyId(companyId);
             SetRole(role);
             SetName(name);
@@ -27,7 +24,19 @@
             SetPassword(password);
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
+        }
+        public User(int id, int companyId, string role, string name, string email, string password, IEnumerable<string> roles, IEnumerable<int> companiesIds)
+        {
+            Id = id;
             _roles = roles;
+            _companiesIds = companiesIds;
+            SetCompanyId(companyId);
+            SetRole(role);
+            SetName(name);
+            SetEmail(email);
+            SetPassword(password);
+            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         private void SetRole(string role)
@@ -55,25 +64,21 @@
         private void SetName(string name)
         {
             if (string.IsNullOrWhiteSpace(name))
-            {
                 throw new Exception($"User can not have an empty name.");
-            }
             Name = name;
         }
+
         private void SetEmail(string email)
         {
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                throw new Exception($"User can not have an empty email.");
-            }
+            if (!this.CheckIfEmailIsValid(email))
+                throw new Exception($"Email {email} is not valid.");
             Email = email;
         }
+
         private void SetPassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
-            {
                 throw new Exception($"User can not have an empty password.");
-            }
             Password = password;
         }
     }

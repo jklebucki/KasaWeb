@@ -1,3 +1,4 @@
+using Kasa.Core.Domain;
 using NUnit.Framework;
 
 namespace UnitTests
@@ -10,8 +11,11 @@ namespace UnitTests
         }
 
         [Test]
-        public void CheckIfUser()
+        public void CheckIfUserEmailIsValid()
         {
+            var companyIds = new int[] { 1, 2, 3 };
+            var roles = new string[] { "admin", "user" };
+            var user = new User(3, "admin", "TestName", "test@email.pl", "pass", roles, companyIds);
             Assert.Pass();
         }
     }
