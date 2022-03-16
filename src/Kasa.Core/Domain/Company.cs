@@ -62,7 +62,6 @@ namespace Kasa.Core.Domain
         {
             District = district;
         }
-
         private void SetCountry(string country)
         {
             Country = country;
@@ -73,9 +72,7 @@ namespace Kasa.Core.Domain
                 CompanyEmail = companyEmail;
             else
                 throw new Exception($"Email {companyEmail} is not valid.");
-
         }
-
         private void SetCompanyPhone(string companyPhone)
         {
             CompanyPhone = companyPhone;
