@@ -10,13 +10,9 @@ namespace Kasa.Core.Domain
         public string Password { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
-
-        private readonly IEnumerable<string> _roles;
-        private readonly IEnumerable<int> _companiesIds;
-        public User(int companyId, string role, string name, string email, string password, IEnumerable<string> roles, IEnumerable<int> companiesIds)
+        private User() { }
+        public User(int companyId, string role, string name, string email, string password)
         {
-            _roles = roles;
-            _companiesIds = companiesIds;
             SetCompanyId(companyId);
             SetRole(role);
             SetName(name);
@@ -25,11 +21,9 @@ namespace Kasa.Core.Domain
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
-        public User(int id, int companyId, string role, string name, string email, string password, IEnumerable<string> roles, IEnumerable<int> companiesIds)
+        public User(int id, int companyId, string role, string name, string email, string password)
         {
             Id = id;
-            _roles = roles;
-            _companiesIds = companiesIds;
             SetCompanyId(companyId);
             SetRole(role);
             SetName(name);
@@ -46,18 +40,10 @@ namespace Kasa.Core.Domain
                 throw new Exception($"User can not have an empty role.");
             }
             role = role.ToLowerInvariant();
-            if (!_roles.Contains(role))
-            {
-                throw new Exception($"User can not have a role: '{role}'.");
-            }
             Role = role;
         }
         private void SetCompanyId(int companyId)
         {
-            if (!_companiesIds.Contains(companyId))
-            {
-                throw new Exception($"Company with id: '{companyId}' does not exist.");
-            }
             CompanyId = companyId;
         }
 
