@@ -17,7 +17,7 @@ namespace Kasa.Infrastructure.Services
         }
         public async Task CreateAsync(UserDto userDto)
         {
-            var user = _mapper.Map<User>(userDto);
+            var user = new User(userDto.CompanyId, userDto.Role, userDto.Name, userDto.Email, "");
             _kasaDbContext.Users.Add(user);
             await _kasaDbContext.SaveChangesAsync();
         }
