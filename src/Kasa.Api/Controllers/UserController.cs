@@ -1,5 +1,6 @@
 using Kasa.Core.Domain;
 using Kasa.Infrastructure.Data;
+using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,16 +18,15 @@ namespace Kasa.Api.Controllers
             _userService = userService;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateTestUser()
+        public async Task<IActionResult> CreateUser([FromBody] UserDto user)
         {
-            _kasaDbContext.Users.Add(new User(0, 1, "admin", "TestUser", "test@test.pl", "PassWord"));
-            await _kasaDbContext.SaveChangesAsync();
+            await _userService.CreateAsync(user);
             return Ok();
         }
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("company/{companyId}")]
+        public async Task<IActionResult> Get(int companyId)
         {
-            var users = await _userService.GetCompanyUsersAsync(1);
+            var users = await _userService.GetCompanyUsersAsync(companyId);
             return Ok(users);
         }
     }

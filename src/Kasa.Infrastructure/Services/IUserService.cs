@@ -5,7 +5,7 @@ namespace Kasa.Infrastructure.Services
 {
     public interface IUserService
     {
-        Task CreateAsync(User user);
+        Task CreateAsync(UserDto user);
         Task<UserDto> GetAsync(int userId);
         Task<IEnumerable<UserDto>> GetCompanyUsersAsync(int companyId);
         Task Update(User user);

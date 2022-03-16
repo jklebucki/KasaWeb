@@ -15,9 +15,11 @@ namespace Kasa.Infrastructure.Services
             _kasaDbContext = kasaDbContext;
             _mapper = mapper;
         }
-        public Task CreateAsync(User user)
+        public async Task CreateAsync(UserDto userDto)
         {
-            throw new NotImplementedException();
+            var user = _mapper.Map<User>(userDto);
+            _kasaDbContext.Users.Add(user);
+            await _kasaDbContext.SaveChangesAsync();
         }
 
         public Task<UserDto> GetAsync(int userId)

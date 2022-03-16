@@ -11,7 +11,7 @@ var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
 builder.Services.AddDbContext<KasaDbContext>(options => options.UseMySql(connectionString, serverVersion));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton(AutoMapperConfig.InitAutoMapper());
-builder.Services.AddControllers();//.AddNewtonsoftJson();
+builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
