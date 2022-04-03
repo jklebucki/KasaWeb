@@ -33,7 +33,7 @@ namespace Kasa.Infrastructure.Services
             var signingCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key)),
                 SecurityAlgorithms.HmacSha256);
             var jwt = new JwtSecurityToken(
-                issuer: _jwtSettings.Issuer,
+                issuer: null,//_jwtSettings.Issuer,
                 claims: claims,
                 notBefore: now,
                 expires: expires,

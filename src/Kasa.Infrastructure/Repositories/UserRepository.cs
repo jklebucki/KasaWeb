@@ -1,6 +1,7 @@
 using Kasa.Core.Domain;
 using Kasa.Core.Repositories;
 using Kasa.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Kasa.Infrastructure.Repositories
 {
@@ -32,14 +33,14 @@ namespace Kasa.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<User>> GetListAsync(string email)
+        public async Task<IEnumerable<User>> GetByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            return await _kasaDbContext.Users.Where(c => c.Email.Contains(email)).ToListAsync();
         }
 
-        public Task<IEnumerable<User>> GetListAsync(int companyId)
+        public async Task<IEnumerable<User>> GetByCompanyGroupAsync(int companyId)
         {
-            throw new NotImplementedException();
+            return await _kasaDbContext.Users.Where(c => c.CompanyGroupId == companyId).ToListAsync();
         }
 
         public Task UpdateAsync(User user)

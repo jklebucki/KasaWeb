@@ -1,4 +1,6 @@
+using Kasa.Api.Commands.Users;
 using Kasa.Core.Domain;
+using Kasa.Core.Repositories;
 using Kasa.Infrastructure.Data;
 using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
@@ -10,23 +12,22 @@ namespace Kasa.Api.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly KasaDbContext _kasaDbContext;
-        private readonly IUserService _userService;
+       private readonly IUserService _userService;
         public UserController(KasaDbContext kasaDbContext, IUserService userService)
         {
-            _kasaDbContext = kasaDbContext;
             _userService = userService;
         }
         [HttpPost]
-        public async Task<IActionResult> CreateUser([FromBody] UserDto user)
+        public async Task<IActionResult> CreateUser([FromBody] Register register)
         {
+            var user = new User(0,"user", register.Name, register.FirstName, register.LastName, register.Email, register.Password);
             await _userService.CreateAsync(user);
             return Ok();
         }
-        [HttpGet("company/{companyId}")]
-        public async Task<IActionResult> Get(int companyId)
+        [HttpGet("company/{companyGroupId}")]
+        public async Task<IActionResult> Get(int companyGroupId)
         {
-            var users = await _userService.GetCompanyUsersAsync(companyId);
+            var users = await _userService.GetCompanyGroupUsersAsync(companyGroupId);
             return Ok(users);
         }
     }

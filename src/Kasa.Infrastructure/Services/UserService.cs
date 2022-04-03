@@ -3,25 +3,21 @@ using Kasa.Core.Domain;
 using Kasa.Core.Repositories;
 using Kasa.Infrastructure.Data;
 using Kasa.Infrastructure.DTO;
-using Microsoft.EntityFrameworkCore;
-
 namespace Kasa.Infrastructure.Services
 {
     public class UserService : IUserService
     {
         private readonly IMapper _mapper;
-        private readonly KasaDbContext _kasaDbContext;
         private readonly IUserRepository _userRepository;
-        public UserService(KasaDbContext kasaDbContext, IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
-            _kasaDbContext = kasaDbContext;
             _mapper = mapper;
         }
-        public async Task CreateAsync(UserDto userDto)
+        public async Task CreateAsync(User user)
         {
-            var user = new User(0,userDto.CompanyGroupId, userDto.Role, userDto.Name, userDto.FirstName, userDto.LastName, userDto.Email, "");
-            await _userRepository.AddAsync(user);
+            var newUser = new User(0, user.CompanyGroupId, user.Role, user.Name, user.FirstName, user.LastName, user.Email, user.Password);
+            await _userRepository.AddAsync(newUser);
         }
 
         public Task<UserDto> GetAsync(int userId)
@@ -29,10 +25,10 @@ namespace Kasa.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<UserDto>> GetCompanyUsersAsync(int companyId)
+        public async Task<IEnumerable<UserDto>> GetCompanyGroupUsersAsync(int companyGroupId)
         {
-            var companyUsers = await _kasaDbContext.Users.Where(x => x.CompanyGroupId == companyId).ToListAsync();
-            return _mapper.Map<List<UserDto>>(companyUsers);
+            var companyGroupUsers = await _userRepository.GetByCompanyGroupAsync(companyGroupId);
+            return _mapper.Map<List<UserDto>>(companyGroupUsers);
         }
 
         public Task Remove(int userId)

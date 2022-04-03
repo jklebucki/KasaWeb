@@ -21,5 +21,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Kasa.Infrastructure\Kasa.Infrastructure.csproj" />
   </ItemGroup>
+  <ItemGroup>
+   <None Update="appsettings.json">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </None>
+</ItemGroup>
 
 </Project>

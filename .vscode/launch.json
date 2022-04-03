@@ -1,11 +1,31 @@
 {
     "version": "0.2.0",
     "configurations": [
+    {
+        "name": ".NET Core Launch (API)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build-api",
+        "program": "${workspaceFolder}/src/Kasa.Api/bin/Debug/net6.0/Kasa.Api.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/src/Kasa.Api",
+        "stopAtEntry": false,
+        "serverReadyAction": {
+            "action": "openExternally",
+            "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+        },
+        "env": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "sourceFileMap": {
+            "/Views": "${workspaceFolder}/Views"
+        }
+    },
         {
             // Use IntelliSense to find out which attributes exist for C# debugging
             // Use hover for the description of the existing attributes
             // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-            "name": ".NET Core Launch (web)",
+            "name": ".NET Core Launch (WEB)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
