@@ -4,6 +4,7 @@ namespace Kasa.Core.Domain
 {
     public class Company : Entity
     {
+        public int CompanyGroupId { get; set; }
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public string Street { get; protected set; }
@@ -16,7 +17,10 @@ namespace Kasa.Core.Domain
         public DateTime CreatedAt { get; protected set; }
         public DateTime? UpdatedAt { get; protected set; }
         public IEnumerable<Location> Locations { get; protected set; }
-        public Company(string name,
+        private Company() { }
+        public Company(int id,
+                       int companyGroupId,
+                       string name,
                        string description,
                        string street,
                        string place,
@@ -26,6 +30,8 @@ namespace Kasa.Core.Domain
                        string companyEmail,
                        string companyPhone)
         {
+            SetId(id);
+            SetCompanyGroupId(companyGroupId);
             SetName(name);
             SetDescription(description);
             SetStreet(street);
@@ -37,7 +43,14 @@ namespace Kasa.Core.Domain
             SetCompanyPhone(companyPhone);
             CreatedAt = DateTime.UtcNow;
         }
-
+        private void SetId(int id)
+        {
+            Id = id;
+        }
+        private void SetCompanyGroupId(int companyGroupId)
+        {
+            CompanyGroupId = companyGroupId;
+        }
         private void SetName(string name)
         {
             Name = name;

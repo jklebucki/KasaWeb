@@ -3,36 +3,48 @@ namespace Kasa.Core.Domain
 {
     public class User : Entity
     {
-        public int CompanyId { get; protected set; }
+        public int CompanyGroupId { get; protected set; }
         public string Role { get; protected set; }
-        public string Name { get; protected set; }
+        public string? Name { get; protected set; }
+        public string? FirstName { get; protected set; }
+        public string? LastName { get; protected set; }
         public string Email { get; protected set; }
         public string Password { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         private User() { }
-        public User(int companyId, string role, string name, string email, string password, string[] roles, int[] companyIds)
+        public User(int companyId, string role, string name, string firstName, string lastName, string email, string password)
         {
             SetCompanyId(companyId);
             SetRole(role);
             SetName(name);
+            SetFirstName(firstName);
+            SetLastName(lastName);
             SetEmail(email);
             SetPassword(password);
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
-        public User(int id, int companyId, string role, string name, string email, string password)
+        public User(int? id, int companyId, string role, string name, string firstName, string lastName, string email, string password)
         {
-            Id = id;
+            SetId(id);
             SetCompanyId(companyId);
             SetRole(role);
             SetName(name);
+            SetFirstName(firstName);
+            SetLastName(lastName);
             SetEmail(email);
             SetPassword(password);
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
 
+        private void SetId(int? id)
+        {
+            if (id == null)
+                throw new Exception($"User ID can not be null.");
+            Id = (int)id;
+        }
         private void SetRole(string role)
         {
             if (string.IsNullOrWhiteSpace(role))
@@ -42,9 +54,10 @@ namespace Kasa.Core.Domain
             role = role.ToLowerInvariant();
             Role = role;
         }
+
         private void SetCompanyId(int companyId)
         {
-            CompanyId = companyId;
+            CompanyGroupId = companyId;
         }
 
         private void SetName(string name)
@@ -52,6 +65,16 @@ namespace Kasa.Core.Domain
             if (string.IsNullOrWhiteSpace(name))
                 throw new Exception($"User can not have an empty name.");
             Name = name;
+        }
+
+        private void SetFirstName(string firstName)
+        {
+            FirstName = firstName;
+        }
+
+        private void SetLastName(string lastName)
+        {
+            LastName = lastName;
         }
 
         private void SetEmail(string email)
