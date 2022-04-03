@@ -1,4 +1,4 @@
-﻿using Kasa.Core.Extensions;
+using Kasa.Core.Extensions;
 namespace Kasa.Core.Domain
 {
     public class User : Entity
@@ -11,7 +11,7 @@ namespace Kasa.Core.Domain
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         private User() { }
-        public User(int companyId, string role, string name, string email, string password)
+        public User(int companyId, string role, string name, string email, string password, string[] roles, int[] companyIds)
         {
             SetCompanyId(companyId);
             SetRole(role);

@@ -1,5 +1,6 @@
 using AutoMapper;
 using Kasa.Core.Domain;
+using Kasa.Core.Repositories;
 using Kasa.Infrastructure.Data;
 using Kasa.Infrastructure.DTO;
 using Microsoft.EntityFrameworkCore;
@@ -10,16 +11,17 @@ namespace Kasa.Infrastructure.Services
     {
         private readonly IMapper _mapper;
         private readonly KasaDbContext _kasaDbContext;
-        public UserService(KasaDbContext kasaDbContext, IMapper mapper)
+        private readonly IUserRepository _userRepository;
+        public UserService(KasaDbContext kasaDbContext, IUserRepository userRepository, IMapper mapper)
         {
+            _userRepository = userRepository;
             _kasaDbContext = kasaDbContext;
             _mapper = mapper;
         }
         public async Task CreateAsync(UserDto userDto)
         {
-            var user = new User(userDto.CompanyId, userDto.Role, userDto.Name, userDto.Email, "");
-            _kasaDbContext.Users.Add(user);
-            await _kasaDbContext.SaveChangesAsync();
+            var user = new User(0,userDto.CompanyId, userDto.Role, userDto.Name, userDto.Email, "");
+            await _userRepository.AddAsync(user);
         }
 
         public Task<UserDto> GetAsync(int userId)

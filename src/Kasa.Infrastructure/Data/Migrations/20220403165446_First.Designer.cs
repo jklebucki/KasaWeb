@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kasa.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(KasaDbContext))]
-    [Migration("20220316225157_Initial")]
-    partial class Initial
+    [Migration("20220403165446_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
