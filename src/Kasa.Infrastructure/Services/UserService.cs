@@ -20,7 +20,7 @@ namespace Kasa.Infrastructure.Services
         }
         public async Task CreateAsync(UserDto userDto)
         {
-            var user = new User(0,userDto.CompanyId, userDto.Role, userDto.Name, userDto.Email, "");
+            var user = new User(0,userDto.CompanyGroupId, userDto.Role, userDto.Name, userDto.FirstName, userDto.LastName, userDto.Email, "");
             await _userRepository.AddAsync(user);
         }
 
@@ -31,7 +31,7 @@ namespace Kasa.Infrastructure.Services
 
         public async Task<IEnumerable<UserDto>> GetCompanyUsersAsync(int companyId)
         {
-            var companyUsers = await _kasaDbContext.Users.Where(x => x.CompanyId == companyId).ToListAsync();
+            var companyUsers = await _kasaDbContext.Users.Where(x => x.CompanyGroupId == companyId).ToListAsync();
             return _mapper.Map<List<UserDto>>(companyUsers);
         }
 
