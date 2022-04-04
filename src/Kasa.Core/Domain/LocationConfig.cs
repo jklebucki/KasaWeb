@@ -4,6 +4,7 @@ namespace Kasa.Core.Domain
 {
     public class LocationConfig : Entity
     {
-        public int CompanyId { get; set; } 
+        public int LocationId { get; set; }
+        public int DestinationSystemId { get; set; } 
     }
 }
