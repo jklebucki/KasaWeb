@@ -13,9 +13,9 @@ namespace Kasa.Core.Domain
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         private User() { }
-        public User(int companyId, string role, string name, string firstName, string lastName, string email, string password)
+        public User(int companyGroupId, string role, string name, string firstName, string lastName, string email, string password)
         {
-            SetCompanyId(companyId);
+            SetCompanyGroupId(companyGroupId);
             SetRole(role);
             SetName(name);
             SetFirstName(firstName);
@@ -25,10 +25,10 @@ namespace Kasa.Core.Domain
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
-        public User(int? id, int companyId, string role, string name, string firstName, string lastName, string email, string password)
+        public User(int? id, int companyGroupId, string role, string name, string firstName, string lastName, string email, string password)
         {
             SetId(id);
-            SetCompanyId(companyId);
+            SetCompanyGroupId(companyGroupId);
             SetRole(role);
             SetName(name);
             SetFirstName(firstName);
@@ -55,9 +55,9 @@ namespace Kasa.Core.Domain
             Role = role;
         }
 
-        private void SetCompanyId(int companyId)
+        private void SetCompanyGroupId(int companyGroupId)
         {
-            CompanyGroupId = companyId;
+            CompanyGroupId = companyGroupId;
         }
 
         private void SetName(string name)

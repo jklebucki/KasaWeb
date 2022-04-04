@@ -2,6 +2,7 @@ namespace Kasa.Api.Commands.Users
 {
     public class Register
     {
+        public int CompanyGroupId { get; set; }
         public string? Name { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
