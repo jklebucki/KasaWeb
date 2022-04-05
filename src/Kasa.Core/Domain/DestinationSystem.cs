@@ -30,14 +30,26 @@ namespace Kasa.Core.Domain
 
         private void SetDestinationName(string destinationName)
         {
+            if (string.IsNullOrWhiteSpace(destinationName))
+            {
+                throw new Exception($"Destination can not have an empty name.");
+            }
             DestinationName = destinationName;
         }
         private void SetDestinationSystemType(string destinationSystemType)
         {
+            if (string.IsNullOrWhiteSpace(destinationSystemType))
+            {
+                throw new Exception($"Destination can not have an empty system type.");
+            }
             DestinationSystemType = destinationSystemType;
         }
         private void SetDestinationSystemLocation(string destinationSystemLocation)
         {
+            if (string.IsNullOrWhiteSpace(destinationSystemLocation))
+            {
+                throw new Exception($"Destination can not have an empty location.");
+            }
             DestinationSystemLocation = destinationSystemLocation;
         }
 

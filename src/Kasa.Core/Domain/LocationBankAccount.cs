@@ -1,6 +1,6 @@
 namespace Kasa.Core.Domain
 {
-    public class LocationBankAccount: Entity
+    public class LocationBankAccount : Entity
     {
         public int LocationId { get; set; }
         public string BankName { get; set; }

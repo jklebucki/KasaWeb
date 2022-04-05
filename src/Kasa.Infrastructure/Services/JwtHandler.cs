@@ -1,11 +1,11 @@
-using System.Security.Claims;
 using Kasa.Infrastructure.DTO;
+using Kasa.Infrastructure.Extensions;
 using Kasa.Infrastructure.Settings;
 using Microsoft.Extensions.Options;
-using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
-using Kasa.Infrastructure.Extensions;
 
 namespace Kasa.Infrastructure.Services
 {
