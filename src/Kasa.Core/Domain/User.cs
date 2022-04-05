@@ -52,6 +52,8 @@ namespace Kasa.Core.Domain
                 throw new Exception($"User can not have an empty role.");
             }
             role = role.ToLowerInvariant();
+            if (!ConstantData.UserRoles.Roles.Contains(role))
+                throw new Exception($"The {role} role is not allowed.");
             Role = role;
         }
 
