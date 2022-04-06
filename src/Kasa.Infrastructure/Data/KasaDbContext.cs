@@ -1,5 +1,6 @@
 ﻿using Kasa.Core.Domain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Kasa.Infrastructure.Data
 {
@@ -10,12 +11,13 @@ namespace Kasa.Infrastructure.Data
         public KasaDbContext(DbContextOptions<KasaDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // var configuration = new ConfigurationBuilder()
-            //     .SetBasePath(Directory.GetCurrentDirectory())
-            //     .AddJsonFile("appsettings.json")
-            //     .Build();
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory().Replace("Infrastructure","Api"))
+                .AddJsonFile("appsettings.json")
+                .Build();
+            
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
-            var connectionString = "Server=localhost;Database=KasaWeb;Uid=root;Pwd=sasa;";//configuration.GetConnectionString("MySqlConnection");
+            var connectionString = configuration.GetConnectionString("MySqlConnection");
             optionsBuilder.UseMySql(connectionString, serverVersion);
         }
     }
