@@ -12,13 +12,20 @@ namespace Kasa.Infrastructure.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory().Replace("Infrastructure","Api"))
+                .SetBasePath(Directory.GetCurrentDirectory().Replace("Infrastructure", "Api"))
                 .AddJsonFile("appsettings.json")
                 .Build();
-            
+
             var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
             var connectionString = configuration.GetConnectionString("MySqlConnection");
             optionsBuilder.UseMySql(connectionString, serverVersion);
+
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>()
+                .HasIndex(b => b.Email)
+                .IsUnique(true);
         }
     }
 }
