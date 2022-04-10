@@ -43,6 +43,31 @@ namespace Kasa.Core.Domain
             SetCompanyPhone(companyPhone);
             CreatedAt = DateTime.UtcNow;
         }
+
+        public Company Update(int companyGroupId,
+                            string name,
+                            string description,
+                            string street,
+                            string place,
+                            string zipCode,
+                            string district,
+                            string country,
+                            string companyEmail,
+                            string companyPhone)
+        {
+            SetCompanyGroupId(companyGroupId);
+            SetName(name);
+            SetDescription(description);
+            SetStreet(street);
+            SetPlace(place);
+            SetZipCode(zipCode);
+            SetDistrict(district);
+            SetCountry(country);
+            SetCompanyEmail(companyEmail);
+            SetCompanyPhone(companyPhone);
+            UpdatedAt = DateTime.UtcNow;
+            return this;
+        }
         private void SetId(int id)
         {
             Id = id;
