@@ -8,6 +8,8 @@ namespace Kasa.Infrastructure.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<LocationBankAccount> LocationBankAccounts { get; set; }
         public KasaDbContext() { }
         public KasaDbContext(DbContextOptions<KasaDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
