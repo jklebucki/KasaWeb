@@ -44,7 +44,7 @@ namespace Kasa.Core.Domain
             CreatedAt = DateTime.UtcNow;
         }
 
-        public Company Update(int companyGroupId,
+        public void Update(int companyGroupId,
                             string name,
                             string description,
                             string street,
@@ -66,7 +66,6 @@ namespace Kasa.Core.Domain
             SetCompanyEmail(companyEmail);
             SetCompanyPhone(companyPhone);
             UpdatedAt = DateTime.UtcNow;
-            return this;
         }
         private void SetId(int id)
         {
