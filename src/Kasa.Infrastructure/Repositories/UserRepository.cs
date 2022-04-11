@@ -18,19 +18,34 @@ namespace Kasa.Infrastructure.Repositories
             await _kasaDbContext.SaveChangesAsync();
         }
 
-        public Task DeleteAsync(User user)
+        public async Task DeleteAsync(int userId)
         {
-            throw new NotImplementedException();
+            var user = await _kasaDbContext.Users.FirstOrDefaultAsync(c => c.Id == userId);
+            if (user != null)
+            {
+                _kasaDbContext.Users.Remove(user);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            else
+                throw new Exception($"There is no user with the given ID {userId}");
         }
 
-        public Task<User> GetAsync(int id)
+        public async Task<User> GetAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _kasaDbContext.Users.FirstOrDefaultAsync(c => c.Id == id);
+            if (user != null)
+                return user;
+            else
+                throw new Exception($"There is no user with the given ID {id}");
         }
 
-        public Task<User> GetAsync(string email)
+        public async Task<User> GetAsync(string email)
         {
-            throw new NotImplementedException();
+            var user = await _kasaDbContext.Users.FirstOrDefaultAsync(c => c.Email == email);
+            if (user != null)
+                return user;
+            else
+                throw new Exception($"There is no user with the given email {email}");
         }
 
         public async Task<IEnumerable<User>> GetByEmailAsync(string email)
@@ -43,9 +58,19 @@ namespace Kasa.Infrastructure.Repositories
             return await _kasaDbContext.Users.Where(c => c.CompanyGroupId == companyId).ToListAsync();
         }
 
-        public Task UpdateAsync(User user)
+        public async Task UpdateAsync(User user)
         {
-            throw new NotImplementedException();
+            var userToUpdate = await _kasaDbContext.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
+            if (userToUpdate != null)
+            {
+                userToUpdate.Update(user.CompanyGroupId, user.Role, user.Name, user.FirstName, user.LastName, user.Email, user.Password);
+                _kasaDbContext.Update(userToUpdate);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new Exception($"User {user.Name} with the email address {user.Email} does not exist.");
+            }
         }
     }
 }

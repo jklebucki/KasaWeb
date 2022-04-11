@@ -10,6 +10,6 @@ namespace Kasa.Core.Repositories
         Task<IEnumerable<User>> GetByCompanyGroupAsync(int companyGroupId);
         Task AddAsync(User user);
         Task UpdateAsync(User user);
-        Task DeleteAsync(User user);
+        Task DeleteAsync(int userId);
     }
 }

@@ -13,7 +13,13 @@ namespace Kasa.Core.Domain
         public DateTime CreatedAt { get; protected set; }
         public DateTime UpdatedAt { get; protected set; }
         private User() { }
-        public User(int companyGroupId, string role, string name, string firstName, string lastName, string email, string password)
+        public User(int companyGroupId,
+                    string role,
+                    string name,
+                    string firstName,
+                    string lastName,
+                    string email,
+                    string password)
         {
             SetCompanyGroupId(companyGroupId);
             SetRole(role);
@@ -25,7 +31,14 @@ namespace Kasa.Core.Domain
             CreatedAt = DateTime.UtcNow;
             UpdatedAt = DateTime.UtcNow;
         }
-        public User(int? id, int companyGroupId, string role, string name, string firstName, string lastName, string email, string password)
+        public User(int? id,
+                    int companyGroupId,
+                    string role,
+                    string name,
+                    string firstName,
+                    string lastName,
+                    string email,
+                    string password)
         {
             SetId(id);
             SetCompanyGroupId(companyGroupId);
@@ -36,6 +49,24 @@ namespace Kasa.Core.Domain
             SetEmail(email);
             SetPassword(password);
             CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void Update(int companyGroupId,
+            string role,
+            string name,
+            string firstName,
+            string lastName,
+            string email,
+            string password)
+        {
+            SetCompanyGroupId(companyGroupId);
+            SetRole(role);
+            SetName(name);
+            SetFirstName(firstName);
+            SetLastName(lastName);
+            SetEmail(email);
+            SetPassword(password);
             UpdatedAt = DateTime.UtcNow;
         }
 
