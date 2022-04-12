@@ -12,10 +12,11 @@ namespace Kasa.Infrastructure.Repositories
         {
             _kasaDbContext = kasaDbContext;
         }
-        public async Task AddAsync(User user)
+        public async Task<int> AddAsync(User user)
         {
             _kasaDbContext.Users.Add(user);
             await _kasaDbContext.SaveChangesAsync();
+            return user.Id;
         }
 
         public async Task DeleteAsync(int userId)

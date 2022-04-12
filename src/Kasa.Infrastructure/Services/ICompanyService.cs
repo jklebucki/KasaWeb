@@ -4,7 +4,7 @@ namespace Kasa.Infrastructure.Services
 {
     public interface ICompanyService
     {
-        Task AddCompany(Company company);
+        Task<int> AddCompany(Company company);
         Task UpdateCompany(Company company);
         Task DeleteCompany(int companyId);
         Task<Company> GetCompanyById(int companyId);

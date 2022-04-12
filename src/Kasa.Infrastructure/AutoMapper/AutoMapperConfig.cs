@@ -11,6 +11,7 @@ namespace Kasa.Infrastructure.AutoMapper
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<Company, CompanyDTO>();
             });
             configuration.AssertConfigurationIsValid();
             return configuration.CreateMapper();

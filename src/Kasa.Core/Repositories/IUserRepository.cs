@@ -8,7 +8,7 @@ namespace Kasa.Core.Repositories
         Task<User> GetAsync(string email);
         Task<IEnumerable<User>> GetByEmailAsync(string email);
         Task<IEnumerable<User>> GetByCompanyGroupAsync(int companyGroupId);
-        Task AddAsync(User user);
+        Task<int> AddAsync(User user);
         Task UpdateAsync(User user);
         Task DeleteAsync(int userId);
     }

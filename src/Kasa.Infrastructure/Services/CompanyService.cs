@@ -15,9 +15,9 @@ namespace Kasa.Infrastructure.Services
             _userRepository = userRepository;
         }
 
-        public async Task AddCompany(Company company)
+        public async Task<int> AddCompany(Company company)
         {
-            await _userRepository.Add(company);
+            return await _userRepository.Add(company);
         }
 
         public async Task DeleteCompany(int companyId)

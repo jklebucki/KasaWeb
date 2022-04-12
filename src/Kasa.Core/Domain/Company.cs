@@ -4,7 +4,7 @@ namespace Kasa.Core.Domain
 {
     public class Company : Entity
     {
-        public int CompanyGroupId { get; set; }
+        public int CompanyGroupId { get; protected set; }
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public string Street { get; protected set; }
