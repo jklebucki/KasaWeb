@@ -14,16 +14,17 @@ namespace Kasa.Infrastructure.Repositories
             _kasaDbContext = kasaDbContext ?? throw new ArgumentNullException(nameof(kasaDbContext));
         }
 
-        public async Task Add(Company company)
+        public async Task<int> Add(Company company)
         {
             try
             {
                 _kasaDbContext.Add(company);
                 await _kasaDbContext.SaveChangesAsync();
+                return company.Id;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.InnerException == null ? ex.InnerException?.Message : ex.Message);
+                throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
             }
         }
 

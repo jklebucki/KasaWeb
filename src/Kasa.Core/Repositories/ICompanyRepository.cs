@@ -4,7 +4,7 @@ namespace Kasa.Core.Repositories
 {
     public interface ICompanyRepository
     {
-        Task Add(Company company);
+        Task<int> Add(Company company);
         Task Remove(int id);
         Task Update(Company company);
         Task<Company> GetById(int id);
