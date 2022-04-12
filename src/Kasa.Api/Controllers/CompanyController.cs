@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Kasa.Api.Commands.Company;
 using Kasa.Core.Domain;
-using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
