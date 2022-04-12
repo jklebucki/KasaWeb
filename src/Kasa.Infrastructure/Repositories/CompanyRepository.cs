@@ -38,7 +38,7 @@ namespace Kasa.Infrastructure.Repositories
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex.InnerException == null ? ex.InnerException?.Message : ex.Message);
+                    throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
                 }
             else
                 throw new Exception($"Company with ID: {id} does not exist.");
@@ -66,7 +66,7 @@ namespace Kasa.Infrastructure.Repositories
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(ex.InnerException == null ? ex.InnerException?.Message : ex.Message);
+                    throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
                 }
             else
                 throw new Exception($"Company with {company.Name} with ID: {company.Id} does not exist.");
