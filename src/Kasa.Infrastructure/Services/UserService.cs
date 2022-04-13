@@ -13,21 +13,20 @@ namespace Kasa.Infrastructure.Services
             _userRepository = userRepository;
             _mapper = mapper;
         }
-        public async Task CreateAsync(User user)
+        public async Task<int> CreateAsync(User user)
         {
             var newUser = new User(0, user.CompanyGroupId, user.Role, user.Name, user.FirstName, user.LastName, user.Email, user.Password);
-            await _userRepository.AddAsync(newUser);
+            return await _userRepository.AddAsync(newUser);
         }
 
-        public Task<UserDto> GetAsync(int userId)
+        public Task<User> GetAsync(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<UserDto>> GetCompanyGroupUsersAsync(int companyGroupId)
+        public async Task<IEnumerable<User>> GetCompanyGroupUsersAsync(int companyGroupId)
         {
-            var companyGroupUsers = await _userRepository.GetByCompanyGroupAsync(companyGroupId);
-            return _mapper.Map<List<UserDto>>(companyGroupUsers);
+            return await _userRepository.GetByCompanyGroupAsync(companyGroupId);
         }
 
         public Task Remove(int userId)

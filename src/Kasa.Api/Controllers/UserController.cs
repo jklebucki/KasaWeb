@@ -1,6 +1,8 @@
+using AutoMapper;
 using Kasa.Api.Commands.Users;
 using Kasa.Core.Domain;
 using Kasa.Infrastructure.Data;
+using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,22 +13,54 @@ namespace Kasa.Api.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
-        public UserController(KasaDbContext kasaDbContext, IUserService userService)
+        private readonly IMapper _mapper;
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetUser(int userId)
+        {
+            try
+            {
+                var user = await _userService.GetAsync(userId).ConfigureAwait(false);
+                return Ok(_mapper.Map<UserDto>(user));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+        [HttpGet("companyusers/{companyGroupId}")]
+        public async Task<IActionResult> GetCompanyGroupUsers(int companyGroupId)
+        {
+            var users = await _userService.GetCompanyGroupUsersAsync(companyGroupId).ConfigureAwait(false);
+            return Ok(_mapper.Map<List<UserDto>>(users));
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] Register register)
         {
-            var user = new User(register.CompanyGroupId, register.Role, register.Name, register.FirstName, register.LastName, register.Email, register.Password);
-            await _userService.CreateAsync(user);
-            return Ok();
-        }
-        [HttpGet("companyusers/{companyGroupId}")]
-        public async Task<IActionResult> Get(int companyGroupId)
-        {
-            var users = await _userService.GetCompanyGroupUsersAsync(companyGroupId);
-            return Ok(users);
+            try
+            {
+                User user = new User(register.CompanyGroupId,
+                                        register.Role,
+                                        register.Name,
+                                        register.FirstName,
+                                        register.LastName,
+                                        register.Email,
+                                        register.Password);
+                var userId = await _userService.CreateAsync(user).ConfigureAwait(false);
+                return Ok($"/User/{userId}");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

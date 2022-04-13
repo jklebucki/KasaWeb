@@ -5,9 +5,9 @@ namespace Kasa.Infrastructure.Services
 {
     public interface IUserService
     {
-        Task CreateAsync(User user);
-        Task<UserDto> GetAsync(int userId);
-        Task<IEnumerable<UserDto>> GetCompanyGroupUsersAsync(int companyGroupId);
+        Task<int> CreateAsync(User user);
+        Task<User> GetAsync(int userId);
+        Task<IEnumerable<User>> GetCompanyGroupUsersAsync(int companyGroupId);
         Task Update(User user);
         Task Remove(int userId);
     }
