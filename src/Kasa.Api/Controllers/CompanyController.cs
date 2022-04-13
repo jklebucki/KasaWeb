@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Kasa.Api.Commands.Company;
 using Kasa.Core.Domain;
+using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,8 +22,22 @@ namespace Kasa.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetCompany(int id)
         {
-            var company = await _companyservice.GetCompanyById(id);
-            return Ok(company);
+            try
+            {
+                var company = await _companyservice.GetCompanyById(id);
+                return Ok(_mapper.Map<CompanyDTO>(company));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("companies/{companyName}")]
+        public async Task<IActionResult> GetCompanies(string companyName)
+        {
+            var companies = await _companyservice.GetCompanyByName(companyName);
+            return Ok(_mapper.Map<List<CompanyDTO>>(companies));
         }
 
         [HttpPost]
@@ -42,9 +57,22 @@ namespace Kasa.Api.Controllers
                                           create.CompanyEmail,
                                           create.CompanyPhone);
                 var newCompanyId = await _companyservice.AddCompany(company);
-                return Ok(newCompanyId);
+                return Ok($"/Company/{newCompanyId}");
             }
             return BadRequest();
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCompany(int id)
+        {
+            try
+            {
+                await _companyservice.DeleteCompany(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
