@@ -1,7 +1,6 @@
 using AutoMapper;
 using Kasa.Core.Domain;
 using Kasa.Core.Repositories;
-using Kasa.Infrastructure.DTO;
 namespace Kasa.Infrastructure.Services
 {
     public class UserService : IUserService

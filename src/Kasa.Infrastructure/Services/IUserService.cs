@@ -1,5 +1,4 @@
 using Kasa.Core.Domain;
-using Kasa.Infrastructure.DTO;
 
 namespace Kasa.Infrastructure.Services
 {
