@@ -14,6 +14,9 @@ namespace Kasa.Infrastructure.Repositories
         }
         public async Task<int> AddAsync(User user)
         {
+            var companyGroup = await _kasaDbContext.Companies.FirstOrDefaultAsync(g => g.Id == user.CompanyGroupId);
+            if (companyGroup == null)
+                throw new Exception($"Company group with ID {user.CompanyGroupId} does not exist.");
             _kasaDbContext.Users.Add(user);
             await _kasaDbContext.SaveChangesAsync();
             return user.Id;

@@ -5,12 +5,10 @@ namespace Kasa.Infrastructure.Services
 {
     public class UserService : IUserService
     {
-        private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _mapper = mapper;
         }
         public async Task<int> CreateAsync(User user)
         {
@@ -18,9 +16,9 @@ namespace Kasa.Infrastructure.Services
             return await _userRepository.AddAsync(newUser);
         }
 
-        public Task<User> GetAsync(int userId)
+        public async Task<User> GetAsync(int userId)
         {
-            throw new NotImplementedException();
+            return await _userRepository.GetAsync(userId);
         }
 
         public async Task<IEnumerable<User>> GetCompanyGroupUsersAsync(int companyGroupId)
@@ -28,14 +26,14 @@ namespace Kasa.Infrastructure.Services
             return await _userRepository.GetByCompanyGroupAsync(companyGroupId);
         }
 
-        public Task Remove(int userId)
+        public async Task Remove(int userId)
         {
-            throw new NotImplementedException();
+            await _userRepository.DeleteAsync(userId);
         }
 
-        public Task Update(User user)
+        public async Task Update(User user)
         {
-            throw new NotImplementedException();
+            await _userRepository.UpdateAsync(user);
         }
     }
 }
