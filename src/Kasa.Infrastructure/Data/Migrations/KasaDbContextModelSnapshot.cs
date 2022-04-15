@@ -75,6 +75,21 @@ namespace Kasa.Infrastructure.Data.Migrations
                     b.ToTable("Companies");
                 });
 
+            modelBuilder.Entity("Kasa.Core.Domain.CompanyGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("GroupName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CompanyGroups");
+                });
+
             modelBuilder.Entity("Kasa.Core.Domain.Location", b =>
                 {
                     b.Property<int>("Id")

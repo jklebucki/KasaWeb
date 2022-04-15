@@ -16,6 +16,9 @@ namespace Kasa.Infrastructure.Repositories
 
         public async Task<int> Add(Company company)
         {
+            var companyGroup = await _kasaDbContext.CompanyGroups.FirstOrDefaultAsync(cg=>cg.Id == company.CompanyGroupId);
+            if(companyGroup == null)
+                throw new Exception($"Company group with ID {company.CompanyGroupId} does not exist.");
             try
             {
                 _kasaDbContext.Add(company);
@@ -70,7 +73,7 @@ namespace Kasa.Infrastructure.Repositories
                     throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
                 }
             else
-                throw new Exception($"Company with {company.Name} with ID: {company.Id} does not exist.");
+                throw new Exception($"Company with ID: {company.Id} does not exist.");
 
         }
         public async Task<Company> GetById(int id)

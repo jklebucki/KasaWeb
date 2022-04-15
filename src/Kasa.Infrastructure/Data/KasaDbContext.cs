@@ -8,6 +8,7 @@ namespace Kasa.Infrastructure.Data
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyGroup> CompanyGroups { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<LocationBankAccount> LocationBankAccounts { get; set; }
         public KasaDbContext() { }

@@ -41,25 +41,32 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCompany(Create create)
+        public async Task<IActionResult> AddCompany(CreateCompany create)
         {
-            if (create != null)
+            try
             {
-                var company = new Company(0,
-                                          create.CompanyGroupId,
-                                          create.Name,
-                                          create.Description,
-                                          create.Street,
-                                          create.Place,
-                                          create.ZipCode,
-                                          create.District,
-                                          create.Country,
-                                          create.CompanyEmail,
-                                          create.CompanyPhone);
-                var newCompanyId = await _companyservice.AddCompany(company);
-                return Ok($"/Company/{newCompanyId}");
+                if (create != null)
+                {
+                    var company = new Company(0,
+                                              create.CompanyGroupId,
+                                              create.Name,
+                                              create.Description,
+                                              create.Street,
+                                              create.Place,
+                                              create.ZipCode,
+                                              create.District,
+                                              create.Country,
+                                              create.CompanyEmail,
+                                              create.CompanyPhone);
+                    var newCompanyId = await _companyservice.AddCompany(company);
+                    return Ok($"/Company/{newCompanyId}");
+                }
+                return BadRequest("Create command is null.");
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         [HttpDelete]
         public async Task<IActionResult> DeleteCompany(int id)

@@ -10,6 +10,13 @@ namespace Kasa.Core.Domain
             SetGroupName(groupName);
         }
 
+        public void Update(string groupName)
+        {
+            if (string.IsNullOrWhiteSpace(groupName))
+                throw new Exception($"Company group can not have an empty name.");
+            GroupName = groupName;
+        }
+
         private void SetId(int? id)
         {
             if (id == null)

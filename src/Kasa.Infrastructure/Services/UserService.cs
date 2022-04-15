@@ -1,4 +1,3 @@
-using AutoMapper;
 using Kasa.Core.Domain;
 using Kasa.Core.Repositories;
 namespace Kasa.Infrastructure.Services

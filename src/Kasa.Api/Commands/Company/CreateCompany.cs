@@ -1,6 +1,6 @@
 ﻿namespace Kasa.Api.Commands.Company
 {
-    public class Create
+    public class CreateCompany
     {
         public int CompanyGroupId { get; set; }
         public string Name { get; set; }
