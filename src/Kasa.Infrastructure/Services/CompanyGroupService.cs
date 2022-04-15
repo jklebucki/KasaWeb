@@ -18,13 +18,13 @@ namespace Kasa.Infrastructure.Services
             return companyGroupId;
         }
 
-        public Task UpdateCompanyGroup(CompanyGroup companyGroup)
+        public async Task UpdateCompanyGroup(CompanyGroup companyGroup)
         {
-            throw new NotImplementedException();
+            await _companyGroupRepository.Update(companyGroup);
         }
-        public Task DeleteCompanyGroup(int companyGroupId)
+        public async Task DeleteCompanyGroup(int companyGroupId)
         {
-            throw new NotImplementedException();
+            await _companyGroupRepository.Remove(companyGroupId);
         }
 
         public async Task<CompanyGroup> GetCompanyGroupById(int companyGroupId)
@@ -34,7 +34,7 @@ namespace Kasa.Infrastructure.Services
 
         public Task<IEnumerable<CompanyGroup>> GetCompanyGroupByName(string companyGroupName)
         {
-            throw new NotImplementedException();
+            return _companyGroupRepository.GetByName(companyGroupName);
         }
     }
 }
