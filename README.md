@@ -1,2 +1,9 @@
 # KasaWeb
-Webowa wersja systemu Kasa AJK
+
+Web version of the Kasa AJK application - **under development**
+
+Current stack:
+
+* .net core 6
+* Angular
+* MariaDB (MySQL)
