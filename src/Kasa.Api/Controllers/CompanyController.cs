@@ -11,11 +11,11 @@ namespace Kasa.Api.Controllers
     [Route("[controller]")]
     public class CompanyController : ControllerBase
     {
-        private readonly ICompanyService _companyservice;
+        private readonly ICompanyService _companyService;
         private readonly IMapper _mapper;
         public CompanyController(ICompanyService companyservice, IMapper mapper)
         {
-            _companyservice = companyservice;
+            _companyService = companyservice;
             _mapper = mapper;
         }
 
@@ -24,7 +24,7 @@ namespace Kasa.Api.Controllers
         {
             try
             {
-                var company = await _companyservice.GetCompanyById(id);
+                var company = await _companyService.GetCompanyById(id);
                 return Ok(_mapper.Map<CompanyDTO>(company));
             }
             catch (Exception ex)
@@ -36,7 +36,7 @@ namespace Kasa.Api.Controllers
         [HttpGet("companies/{companyName}")]
         public async Task<IActionResult> GetCompanies(string companyName)
         {
-            var companies = await _companyservice.GetCompanyByName(companyName);
+            var companies = await _companyService.GetCompanyByName(companyName);
             return Ok(_mapper.Map<List<CompanyDTO>>(companies));
         }
 
@@ -58,7 +58,7 @@ namespace Kasa.Api.Controllers
                                               create.Country,
                                               create.CompanyEmail,
                                               create.CompanyPhone);
-                    var newCompanyId = await _companyservice.AddCompany(company);
+                    var newCompanyId = await _companyService.AddCompany(company);
                     return Ok($"/Company/{newCompanyId}");
                 }
                 return BadRequest("Create command is null.");
@@ -73,7 +73,7 @@ namespace Kasa.Api.Controllers
         {
             try
             {
-                await _companyservice.DeleteCompany(id);
+                await _companyService.DeleteCompany(id);
                 return Ok();
             }
             catch (Exception ex)
@@ -99,7 +99,7 @@ namespace Kasa.Api.Controllers
                                           updateCompany.Country,
                                           updateCompany.CompanyEmail,
                                           updateCompany.CompanyPhone);
-                await _companyservice.UpdateCompany(company);
+                await _companyService.UpdateCompany(company);
                 return Ok();
             }
             catch (Exception ex)

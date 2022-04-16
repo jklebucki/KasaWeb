@@ -1,6 +1,6 @@
-namespace Kasa.Infrastructure.DTO
+﻿namespace Kasa.Infrastructure.Commands.Users
 {
-    public class UserDto
+    public class UpdateUser
     {
         public int Id { get; set; }
         public int CompanyGroupId { get; set; }
@@ -9,5 +9,6 @@ namespace Kasa.Infrastructure.DTO
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }
+        public string? Password { get; set; }
     }
 }

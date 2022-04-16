@@ -72,7 +72,30 @@ namespace Kasa.Api.Controllers
             {
                 return NotFound(ex.Message);
             }
-
         }
+        [HttpPut]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUser updateUser)
+        {
+            if (updateUser == null)
+                return BadRequest("Command UpdateUser is null.");
+            try
+            {
+                var user = new User(updateUser.Id,
+                                    updateUser.CompanyGroupId,
+                                    updateUser.Role,
+                                    updateUser.Name,
+                                    updateUser.FirstName,
+                                    updateUser.LastName,
+                                    updateUser.Email,
+                                    updateUser.Password);
+                await _userService.Update(user);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

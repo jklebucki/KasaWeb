@@ -6,12 +6,10 @@ namespace Kasa.Infrastructure.Services
 {
     public class CompanyService : ICompanyService
     {
-        private readonly IMapper _mapper;
         private readonly ICompanyRepository _companyRepository;
 
-        public CompanyService(IMapper mapper, ICompanyRepository userRepository)
+        public CompanyService(ICompanyRepository userRepository)
         {
-            _mapper = mapper;
             _companyRepository = userRepository;
         }
 
