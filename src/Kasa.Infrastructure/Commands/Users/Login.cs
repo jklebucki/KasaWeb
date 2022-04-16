@@ -1,4 +1,4 @@
-namespace Kasa.Api.Commands.Users
+namespace Kasa.Infrastructure.Commands.Users
 {
     public class Login
     {

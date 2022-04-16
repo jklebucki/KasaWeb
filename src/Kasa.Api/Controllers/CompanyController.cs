@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Kasa.Api.Commands.Company;
+using Kasa.Infrastructure.Commands.Company;
 using Kasa.Core.Domain;
 using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
@@ -81,5 +81,11 @@ namespace Kasa.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut]
+        public async Task<IActionResult> UpdateCompany(CreateCompany create)
+        {
+
+        }
+
     }
 }

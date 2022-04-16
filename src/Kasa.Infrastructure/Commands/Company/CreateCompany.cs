@@ -1,4 +1,4 @@
-﻿namespace Kasa.Api.Commands.Company
+﻿namespace Kasa.Infrastructure.Commands.Company
 {
     public class CreateCompany
     {
