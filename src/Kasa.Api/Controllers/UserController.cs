@@ -1,6 +1,6 @@
 using AutoMapper;
-using Kasa.Api.Commands.Users;
 using Kasa.Core.Domain;
+using Kasa.Infrastructure.Commands.Users;
 using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +45,7 @@ namespace Kasa.Api.Controllers
         {
             try
             {
-                User user = new User(register.CompanyGroupId,
+                User user = new(register.CompanyGroupId,
                                         register.Role,
                                         register.Name,
                                         register.FirstName,
@@ -58,6 +58,19 @@ namespace Kasa.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            try
+            {
+                await _userService.Remove(userId).ConfigureAwait(false);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
             }
 
         }

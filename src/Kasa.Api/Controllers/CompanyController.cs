@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Kasa.Infrastructure.Commands.Company;
 using Kasa.Core.Domain;
+using Kasa.Infrastructure.Commands.Company;
 using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -82,8 +82,30 @@ namespace Kasa.Api.Controllers
             }
         }
         [HttpPut]
-        public async Task<IActionResult> UpdateCompany(CreateCompany create)
+        public async Task<IActionResult> UpdateCompany(UpdateCompany updateCompany)
         {
+            if (updateCompany == null)
+                return BadRequest("UpdateCommand is null.");
+            try
+            {
+                var company = new Company(updateCompany.Id,
+                                          updateCompany.CompanyGroupId,
+                                          updateCompany.Name,
+                                          updateCompany.Description,
+                                          updateCompany.Street,
+                                          updateCompany.Place,
+                                          updateCompany.ZipCode,
+                                          updateCompany.District,
+                                          updateCompany.Country,
+                                          updateCompany.CompanyEmail,
+                                          updateCompany.CompanyPhone);
+                await _companyservice.UpdateCompany(company);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
         }
 

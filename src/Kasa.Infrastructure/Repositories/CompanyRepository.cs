@@ -1,5 +1,6 @@
 ﻿using Kasa.Core.Domain;
 using Kasa.Core.Repositories;
+using Kasa.Infrastructure.Common;
 using Kasa.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,9 +17,7 @@ namespace Kasa.Infrastructure.Repositories
 
         public async Task<int> Add(Company company)
         {
-            var companyGroup = await _kasaDbContext.CompanyGroups.FirstOrDefaultAsync(cg=>cg.Id == company.CompanyGroupId);
-            if(companyGroup == null)
-                throw new Exception($"Company group with ID {company.CompanyGroupId} does not exist.");
+            await RepositoryCommon.CheckIfCompanyGroupExist(_kasaDbContext, company.CompanyGroupId);
             try
             {
                 _kasaDbContext.Add(company);
@@ -51,6 +50,7 @@ namespace Kasa.Infrastructure.Repositories
 
         public async Task Update(Company company)
         {
+            await RepositoryCommon.CheckIfCompanyGroupExist(_kasaDbContext, company.CompanyGroupId);
             var companyToUpdate = await _kasaDbContext.Companies.FirstOrDefaultAsync(c => c.Id == company.Id);
             if (companyToUpdate != null)
                 try

@@ -1,6 +1,5 @@
-﻿using AutoMapper;
+﻿using Kasa.Core.Domain;
 using Kasa.Infrastructure.Commands.CompanyGroup;
-using Kasa.Core.Domain;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +9,10 @@ namespace Kasa.Api.Controllers
     [Route("[controller]")]
     public class CompanyGroupController : ControllerBase
     {
-        private readonly IMapper _mapper;
         private readonly ICompanyGroupService _companyGroupService;
 
-        public CompanyGroupController(IMapper mapper, ICompanyGroupService companyGroupService)
+        public CompanyGroupController(ICompanyGroupService companyGroupService)
         {
-            _mapper = mapper;
             _companyGroupService = companyGroupService;
         }
 
@@ -89,7 +86,8 @@ namespace Kasa.Api.Controllers
                 var companyGroup = new CompanyGroup(companyGroupData.Id, companyGroupData.CompanyGroupName);
                 await _companyGroupService.UpdateCompanyGroup(companyGroup);
                 return Ok();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
