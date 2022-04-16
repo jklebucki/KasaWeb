@@ -18,6 +18,7 @@ namespace Kasa.Api.Controllers
             _mapper = mapper;
             _companyGroupService = companyGroupService;
         }
+
         [HttpGet]
         public async Task<IActionResult> Get(int id)
         {
@@ -31,9 +32,22 @@ namespace Kasa.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpGet("groups/{groupName}")]
+        public async Task<IActionResult> GetByName(string groupName)
+        {
+            try
+            {
+                var companyGroup = await _companyGroupService.GetCompanyGroupByName(groupName);
+                return Ok(companyGroup);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [HttpPost]
-        public async Task<IActionResult> AddCompany(CreateComapanyGroup create)
+        public async Task<IActionResult> AddCompanyGroup(CreateComapanyGroup create)
         {
             try
             {
@@ -48,6 +62,36 @@ namespace Kasa.Api.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCompanyGroup(int id)
+        {
+            try
+            {
+                await _companyGroupService.DeleteCompanyGroup(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutCompanyGroup(UpdateCompanyGroup companyGroupData)
+        {
+            if (companyGroupData == null)
+                return BadRequest("Company group object is null.");
+            try
+            {
+                var companyGroup = new CompanyGroup(companyGroupData.Id, companyGroupData.CompanyGroupName);
+                await _companyGroupService.UpdateCompanyGroup(companyGroup);
+                return Ok();
+            } catch (Exception ex)
+            {
+                return NotFound(ex.Message);
             }
         }
     }
