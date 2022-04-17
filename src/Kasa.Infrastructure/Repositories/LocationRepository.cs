@@ -33,7 +33,7 @@ namespace Kasa.Infrastructure.Repositories
 
         public async Task<IEnumerable<Location>> GetByName(string companyName)
         {
-            return await _kasaDbContext.Locations.Where(l=>l.Name.ToLower() == companyName.ToLower()).ToListAsync();
+            return await _kasaDbContext.Locations.Where(l => l.Name.ToLower() == companyName.ToLower()).ToListAsync();
         }
 
         public async Task<IEnumerable<Location>> GetComapnyGroupLocations(int companyId)
@@ -41,14 +41,39 @@ namespace Kasa.Infrastructure.Repositories
             return await _kasaDbContext.Locations.Where(l => l.CompanyId == companyId).ToListAsync();
         }
 
-        public Task Remove(int id)
+        public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            var locationToRemove = await _kasaDbContext.Locations.FirstOrDefaultAsync(_ => _.Id == id);
+            if (locationToRemove != null)
+            {
+                _kasaDbContext.Locations.Remove(locationToRemove);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            else
+                throw new Exception($"Location with ID {id} does not exist.");
         }
 
-        public Task Update(Location location)
+        public async Task Update(Location location)
         {
-            throw new NotImplementedException();
+            var locationToUpdate = await _kasaDbContext.Locations.FirstOrDefaultAsync(_ => _.Id == location.Id);
+            if (locationToUpdate != null)
+            {
+                locationToUpdate.Update(location.CompanyId,
+                                        location.Name,
+                                        location.Description,
+                                        location.Street,
+                                        location.Place,
+                                        location.ZipCode,
+                                        location.District,
+                                        location.Country,
+                                        location.LocationEmail,
+                                        location.LocationPhone,
+                                        location.DocumentSeries);
+                _kasaDbContext.Locations.Update(locationToUpdate);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            else
+                throw new Exception($"Location with ID {location.Id} does not exist.");
         }
     }
 }
