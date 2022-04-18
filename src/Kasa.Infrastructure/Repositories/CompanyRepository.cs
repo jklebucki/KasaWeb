@@ -90,5 +90,11 @@ namespace Kasa.Infrastructure.Repositories
             var companies = await _kasaDbContext.Companies.Where(c => c.Name.ToLower().Contains(companyName.ToLower())).ToListAsync();
             return companies;
         }
+
+        public async Task<IEnumerable<Company>> GetByGroupId(int companyGroupId)
+        {
+            var companies = await _kasaDbContext.Companies.Where(c => c.CompanyGroupId == companyGroupId).ToListAsync();
+            return companies;
+        }
     }
 }

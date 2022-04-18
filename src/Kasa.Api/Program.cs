@@ -18,6 +18,8 @@ builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
 builder.Services.AddScoped<ICompanyService, CompanyService>();
 builder.Services.AddScoped<ICompanyGroupRepository, CompanyGroupRepository>();
 builder.Services.AddScoped<ICompanyGroupService, CompanyGroupService>();
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
 builder.Services.AddSingleton(AutoMapperConfig.InitAutoMapper());
 // var jwtConfig = new JwtSettings();
 // var x = configuration.GetSection("jwt");//.Get(typeof(JwtSettings));// .Bind(jwtConfig);

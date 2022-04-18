@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using Kasa.Core.Domain;
+﻿using Kasa.Core.Domain;
 using Kasa.Core.Repositories;
 
 namespace Kasa.Infrastructure.Services
@@ -35,6 +34,11 @@ namespace Kasa.Infrastructure.Services
         public async Task<IEnumerable<Company>> GetCompanyByName(string companyName)
         {
             return await _companyRepository.GetByName(companyName);
+        }
+
+        public async Task<IEnumerable<Company>> GetCompanyByGroupId(int companyGroupId)
+        {
+            return await _companyRepository.GetByGroupId(companyGroupId);
         }
     }
 }

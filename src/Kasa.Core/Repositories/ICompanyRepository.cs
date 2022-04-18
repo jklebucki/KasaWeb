@@ -9,5 +9,6 @@ namespace Kasa.Core.Repositories
         Task Update(Company company);
         Task<Company> GetById(int id);
         Task<IEnumerable<Company>> GetByName(string companyName);
+        Task<IEnumerable<Company>> GetByGroupId(int companyGroupId);
     }
 }

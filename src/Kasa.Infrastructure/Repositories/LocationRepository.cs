@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kasa.Infrastructure.Repositories
 {
-    internal class LocationRepository : ILocationRepository
+    public class LocationRepository : ILocationRepository
     {
         private readonly KasaDbContext _kasaDbContext;
 
@@ -33,7 +33,7 @@ namespace Kasa.Infrastructure.Repositories
 
         public async Task<IEnumerable<Location>> GetByName(string companyName)
         {
-            return await _kasaDbContext.Locations.Where(l => l.Name.ToLower() == companyName.ToLower()).ToListAsync();
+            return await _kasaDbContext.Locations.Where(l => l.Name.ToLower().Contains(companyName.ToLower())).ToListAsync();
         }
 
         public async Task<IEnumerable<Location>> GetComapnyGroupLocations(int companyId)

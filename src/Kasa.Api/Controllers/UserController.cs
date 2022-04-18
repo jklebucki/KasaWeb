@@ -25,7 +25,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 var user = await _userService.GetAsync(userId).ConfigureAwait(false);
-                return Ok(_mapper.Map<UserDto>(user));
+                return Ok(_mapper.Map<UserDTO>(user));
             }
             catch (Exception ex)
             {
@@ -37,7 +37,7 @@ namespace Kasa.Api.Controllers
         public async Task<IActionResult> GetCompanyGroupUsers(int companyGroupId)
         {
             var users = await _userService.GetCompanyGroupUsersAsync(companyGroupId).ConfigureAwait(false);
-            return Ok(_mapper.Map<List<UserDto>>(users));
+            return Ok(_mapper.Map<List<UserDTO>>(users));
         }
 
         [HttpPost]

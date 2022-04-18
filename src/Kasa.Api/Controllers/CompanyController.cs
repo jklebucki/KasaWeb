@@ -29,7 +29,7 @@ namespace Kasa.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
         }
 
@@ -40,6 +40,13 @@ namespace Kasa.Api.Controllers
             return Ok(_mapper.Map<List<CompanyDTO>>(companies));
         }
 
+        [HttpGet("companiesInGroup/{companyGroupId}")]
+        public async Task<IActionResult> GetAllCompaniesInGroup(int companyGroupId)
+        {
+            var companies = await _companyService.GetCompanyByGroupId(companyGroupId);
+            return Ok(_mapper.Map<List<CompanyDTO>>(companies));
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddCompany(CreateCompany create)
         {
@@ -47,17 +54,7 @@ namespace Kasa.Api.Controllers
             {
                 if (create != null)
                 {
-                    var company = new Company(0,
-                                              create.CompanyGroupId,
-                                              create.Name,
-                                              create.Description,
-                                              create.Street,
-                                              create.Place,
-                                              create.ZipCode,
-                                              create.District,
-                                              create.Country,
-                                              create.CompanyEmail,
-                                              create.CompanyPhone);
+                    var company = _mapper.Map<Company>(create);
                     var newCompanyId = await _companyService.AddCompany(company);
                     return Ok($"/Company/{newCompanyId}");
                 }
@@ -88,17 +85,7 @@ namespace Kasa.Api.Controllers
                 return BadRequest("UpdateCommand is null.");
             try
             {
-                var company = new Company(updateCompany.Id,
-                                          updateCompany.CompanyGroupId,
-                                          updateCompany.Name,
-                                          updateCompany.Description,
-                                          updateCompany.Street,
-                                          updateCompany.Place,
-                                          updateCompany.ZipCode,
-                                          updateCompany.District,
-                                          updateCompany.Country,
-                                          updateCompany.CompanyEmail,
-                                          updateCompany.CompanyPhone);
+                var company = _mapper.Map<Company>(updateCompany);
                 await _companyService.UpdateCompany(company);
                 return Ok();
             }

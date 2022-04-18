@@ -9,5 +9,6 @@ namespace Kasa.Infrastructure.Services
         Task DeleteCompany(int companyId);
         Task<Company> GetCompanyById(int companyId);
         Task<IEnumerable<Company>> GetCompanyByName(string companyName);
+        Task<IEnumerable<Company>> GetCompanyByGroupId(int companyGroupId);
     }
 }
