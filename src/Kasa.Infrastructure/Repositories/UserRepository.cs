@@ -67,7 +67,7 @@ namespace Kasa.Infrastructure.Repositories
             var userToUpdate = await _kasaDbContext.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
             if (userToUpdate != null)
             {
-                userToUpdate.Update(user.CompanyGroupId, user.Role, user.Name, user.FirstName, user.LastName, user.Email, user.Password);
+                userToUpdate.Update(user.CompanyGroupId, user.Role, user.Name, user.FirstName, user.LastName, user.Email);
                 _kasaDbContext.Update(userToUpdate);
                 await _kasaDbContext.SaveChangesAsync();
             }
@@ -75,6 +75,19 @@ namespace Kasa.Infrastructure.Repositories
             {
                 throw new Exception($"User {user.Name} with the email address {user.Email} does not exist.");
             }
+        }
+
+        public async Task ChangePassword(int userId, string newPasswordHash)
+        {
+            var userToUpdate = await _kasaDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            if (userToUpdate != null)
+            {
+                userToUpdate.SetPassword(newPasswordHash);
+                _kasaDbContext.Update(userToUpdate);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            else
+                throw new Exception($"There is no user with the given ID {userId}");
         }
     }
 }

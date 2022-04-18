@@ -2,7 +2,7 @@
 
 namespace Kasa.Infrastructure.DTO
 {
-    public class LocationDTO
+    public class LocationDto
     {
         public int Id { get; set; }
         public int CompanyId { get; set; }

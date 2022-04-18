@@ -9,5 +9,6 @@ namespace Kasa.Infrastructure.Services
         Task DeleteLocation(int locationId);
         Task<Location> GetLocationById(int locationId);
         Task<IEnumerable<Location>> GetLocationByName(string locationName);
+        Task<IEnumerable<Location>> GetCompanyLocations(int companyId);
     }
 }

@@ -4,6 +4,6 @@ namespace Kasa.Infrastructure.Services
 {
     public interface IJwtHandler
     {
-        JwtDTO CreateToken(int userId, string role);
+        JwtDto CreateToken(int userId, string role);
     }
 }

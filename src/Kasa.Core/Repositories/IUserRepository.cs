@@ -11,5 +11,6 @@ namespace Kasa.Core.Repositories
         Task<int> AddAsync(User user);
         Task UpdateAsync(User user);
         Task DeleteAsync(int userId);
+        Task ChangePassword(int userId, string newPasswordHash);
     }
 }

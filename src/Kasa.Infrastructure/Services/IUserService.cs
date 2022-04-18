@@ -9,5 +9,6 @@ namespace Kasa.Infrastructure.Services
         Task<IEnumerable<User>> GetCompanyGroupUsersAsync(int companyGroupId);
         Task Update(User user);
         Task Remove(int userId);
+        Task ChangePassword(int userId, string oldPassword, string newPassword);
     }
 }

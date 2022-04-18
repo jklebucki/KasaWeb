@@ -17,7 +17,7 @@ namespace Kasa.Infrastructure.Services
         {
             _jwtSettings = jwtSettings.Value;
         }
-        public JwtDTO CreateToken(int userId, string role)
+        public JwtDto CreateToken(int userId, string role)
         {
             var now = DateTime.UtcNow;
             var claims = new Claim[]
@@ -41,7 +41,7 @@ namespace Kasa.Infrastructure.Services
             );
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-            return new JwtDTO
+            return new JwtDto
             {
                 Token = token,
                 Expires = expires.ToTimestamp()

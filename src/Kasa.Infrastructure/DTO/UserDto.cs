@@ -1,6 +1,6 @@
 namespace Kasa.Infrastructure.DTO
 {
-    public class UserDTO
+    public class UserDto
     {
         public int Id { get; set; }
         public int CompanyGroupId { get; set; }

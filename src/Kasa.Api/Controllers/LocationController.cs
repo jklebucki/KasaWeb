@@ -26,7 +26,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 var location = await _locationService.GetLocationById(id);
-                return Ok(_mapper.Map<LocationDTO>(location));
+                return Ok(_mapper.Map<LocationDto>(location));
             }
             catch (Exception ex)
             {
@@ -40,7 +40,21 @@ namespace Kasa.Api.Controllers
             try
             {
                 var location = await _locationService.GetLocationByName(locationName);
-                return Ok(_mapper.Map<List<LocationDTO>>(location));
+                return Ok(_mapper.Map<List<LocationDto>>(location));
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
+        [HttpGet("companyLocations/{companyId}")]
+        public async Task<IActionResult> GetByCompanyId(int companyId)
+        {
+            try
+            {
+                var location = await _locationService.GetCompanyLocations(companyId);
+                return Ok(_mapper.Map<List<LocationDto>>(location));
             }
             catch (Exception ex)
             {

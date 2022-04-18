@@ -8,7 +8,7 @@ namespace Kasa.Core.Repositories
         Task Remove(int id);
         Task Update(Location location);
         Task<Location> GetById(int id);
-        Task<IEnumerable<Location>> GetComapnyGroupLocations(int companyId);
+        Task<IEnumerable<Location>> GetComapnyLocations(int companyId);
         Task<IEnumerable<Location>> GetByName(string companyName);
     }
 }

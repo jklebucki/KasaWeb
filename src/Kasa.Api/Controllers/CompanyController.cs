@@ -25,7 +25,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 var company = await _companyService.GetCompanyById(id);
-                return Ok(_mapper.Map<CompanyDTO>(company));
+                return Ok(_mapper.Map<CompanyDto>(company));
             }
             catch (Exception ex)
             {
@@ -37,14 +37,14 @@ namespace Kasa.Api.Controllers
         public async Task<IActionResult> GetCompanies(string companyName)
         {
             var companies = await _companyService.GetCompanyByName(companyName);
-            return Ok(_mapper.Map<List<CompanyDTO>>(companies));
+            return Ok(_mapper.Map<List<CompanyDto>>(companies));
         }
 
         [HttpGet("companiesInGroup/{companyGroupId}")]
         public async Task<IActionResult> GetAllCompaniesInGroup(int companyGroupId)
         {
             var companies = await _companyService.GetCompanyByGroupId(companyGroupId);
-            return Ok(_mapper.Map<List<CompanyDTO>>(companies));
+            return Ok(_mapper.Map<List<CompanyDto>>(companies));
         }
 
         [HttpPost]
@@ -65,6 +65,7 @@ namespace Kasa.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpDelete]
         public async Task<IActionResult> DeleteCompany(int id)
         {
@@ -78,6 +79,7 @@ namespace Kasa.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpPut]
         public async Task<IActionResult> UpdateCompany(UpdateCompany updateCompany)
         {
@@ -93,7 +95,6 @@ namespace Kasa.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
     }

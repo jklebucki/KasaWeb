@@ -2,6 +2,7 @@ using AutoMapper;
 using Kasa.Core.Domain;
 using Kasa.Infrastructure.Commands.Company;
 using Kasa.Infrastructure.Commands.Location;
+using Kasa.Infrastructure.Commands.Users;
 using Kasa.Infrastructure.DTO;
 
 namespace Kasa.Infrastructure.AutoMapper
@@ -12,9 +13,17 @@ namespace Kasa.Infrastructure.AutoMapper
         {
             var configuration = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<User, UserDTO>();
-                cfg.CreateMap<Company, CompanyDTO>();
-                cfg.CreateMap<Location, LocationDTO>();
+                cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<Register, User>()
+                    .ForMember(x => x.CreatedAt, o => o.Ignore())
+                    .ForMember(x => x.UpdatedAt, o => o.Ignore())
+                    .ForMember(x => x.Id, o => o.Ignore());
+                cfg.CreateMap<UpdateUser, User>()
+                    .ForMember(x => x.CreatedAt, o => o.Ignore())
+                    .ForMember(x => x.UpdatedAt, o => o.Ignore())
+                    .ForMember(x => x.Password, o => o.Ignore());
+                cfg.CreateMap<Company, CompanyDto>();
+                cfg.CreateMap<Location, LocationDto>();
                 cfg.CreateMap<CreateLocation, Location>()
                     .ForMember(x => x.BankAccounts, o => o.Ignore())
                     .IgnoreAllPropertiesWithAnInaccessibleSetter()

@@ -22,6 +22,11 @@ namespace Kasa.Infrastructure.Services
             await _locationRepository.Remove(locationId);
         }
 
+        public async Task<IEnumerable<Location>> GetCompanyLocations(int companyId)
+        {
+            return await _locationRepository.GetComapnyLocations(companyId);
+        }
+
         public async Task<Location> GetLocationById(int locationId)
         {
             return await _locationRepository.GetById(locationId);

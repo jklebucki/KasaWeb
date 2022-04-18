@@ -57,8 +57,7 @@ namespace Kasa.Core.Domain
             string name,
             string firstName,
             string lastName,
-            string email,
-            string password)
+            string email)
         {
             SetCompanyGroupId(companyGroupId);
             SetRole(role);
@@ -66,7 +65,6 @@ namespace Kasa.Core.Domain
             SetFirstName(firstName);
             SetLastName(lastName);
             SetEmail(email);
-            SetPassword(password);
             UpdatedAt = DateTime.UtcNow;
         }
 
@@ -117,7 +115,7 @@ namespace Kasa.Core.Domain
             Email = email;
         }
 
-        private void SetPassword(string password)
+        public void SetPassword(string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 throw new Exception($"User can not have an empty password.");

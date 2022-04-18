@@ -36,7 +36,7 @@ namespace Kasa.Infrastructure.Repositories
             return await _kasaDbContext.Locations.Where(l => l.Name.ToLower().Contains(companyName.ToLower())).ToListAsync();
         }
 
-        public async Task<IEnumerable<Location>> GetComapnyGroupLocations(int companyId)
+        public async Task<IEnumerable<Location>> GetComapnyLocations(int companyId)
         {
             return await _kasaDbContext.Locations.Where(l => l.CompanyId == companyId).ToListAsync();
         }
