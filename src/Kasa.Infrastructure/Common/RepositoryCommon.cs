@@ -17,5 +17,11 @@ namespace Kasa.Infrastructure.Common
             if (companyGroup == null)
                 throw new Exception($"Company with ID {id} does not exist.");
         }
+        public static async Task CheckIfLocationExist(KasaDbContext kasaDbContext, int id)
+        {
+            var location = await kasaDbContext.Locations.FirstOrDefaultAsync(cg => cg.Id == id);
+            if (location == null)
+                throw new Exception($"Location with ID {id} does not exist.");
+        }
     }
 }

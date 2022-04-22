@@ -36,7 +36,7 @@ namespace Kasa.Infrastructure.Repositories
             if (company != null)
                 try
                 {
-                    _kasaDbContext.Companies.Remove(company);
+                    _kasaDbContext.Remove(company);
                     await _kasaDbContext.SaveChangesAsync();
                 }
                 catch (Exception ex)
