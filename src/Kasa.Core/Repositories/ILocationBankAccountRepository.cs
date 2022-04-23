@@ -2,7 +2,7 @@
 
 namespace Kasa.Core.Repositories
 {
-    public interface ILocationBankAccountsRepository
+    public interface ILocationBankAccountRepository
     {
         Task<int> Add(LocationBankAccount locationBankAccount);
         Task Remove(int id);

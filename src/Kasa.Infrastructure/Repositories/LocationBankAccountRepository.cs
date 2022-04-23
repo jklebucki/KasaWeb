@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Kasa.Infrastructure.Repositories
 {
-    public class LocationsBankAccountsRepository : ILocationBankAccountsRepository
+    public class LocationBankAccountRepository : ILocationBankAccountRepository
     {
         private readonly KasaDbContext _kasaDbContext;
 
-        public LocationsBankAccountsRepository(KasaDbContext kasaDbContext)
+        public LocationBankAccountRepository(KasaDbContext kasaDbContext)
         {
             _kasaDbContext = kasaDbContext;
         }
