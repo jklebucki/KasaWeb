@@ -81,8 +81,8 @@ namespace Kasa.Api.Controllers
             try
             {
                 var location = _mapper.Map<Location>(createLocation);
-                await _locationService.AddLocation(location);
-                return Ok();
+                var newLocationId = await _locationService.AddLocation(location);
+                return Ok($"location/{newLocationId}");
             }
             catch (Exception ex)
             {

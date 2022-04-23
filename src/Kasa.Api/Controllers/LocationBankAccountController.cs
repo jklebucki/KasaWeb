@@ -32,6 +32,7 @@ namespace Kasa.Api.Controllers
                 return NotFound(ex.Message);
             }
         }
+
         [HttpGet]
         [Route("locationBankAccounts/{locationId}")]
         public async Task<IActionResult> GetByLocationId(int locationId)

@@ -27,17 +27,18 @@ namespace Kasa.Infrastructure.AutoMapper
                 cfg.CreateMap<LocationBankAccount, LocationBankAccountDto>();
                 cfg.CreateMap<CreateLocation, Location>()
                     .ForMember(x => x.BankAccounts, o => o.Ignore())
-                    .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                    .IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
+                    .ForMember(x => x.CreatedAt, o => o.Ignore())
+                    .ForMember(x => x.UpdatedAt, o => o.Ignore())
+                    .ForMember(x => x.Id, o => o.Ignore());
                 cfg.CreateMap<UpdateCompany, Company>()
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore())
-                    .ForMember(x => x.Locations, o => o.Ignore())
-                    .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                    .IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
+                    .ForMember(x => x.Locations, o => o.Ignore());
                 cfg.CreateMap<CreateCompany, Company>()
-                    .IgnoreAllPropertiesWithAnInaccessibleSetter()
-                    .IgnoreAllSourcePropertiesWithAnInaccessibleSetter();
+                    .ForMember(x => x.CreatedAt, o => o.Ignore())
+                    .ForMember(x => x.UpdatedAt, o => o.Ignore())
+                    .ForMember(x => x.Locations, o => o.Ignore())
+                    .ForMember(x => x.Id, o => o.Ignore());
             });
             configuration.AssertConfigurationIsValid();
             return configuration.CreateMapper();
