@@ -24,6 +24,7 @@ namespace Kasa.Infrastructure.AutoMapper
                     .ForMember(x => x.Password, o => o.Ignore());
                 cfg.CreateMap<Company, CompanyDto>();
                 cfg.CreateMap<Location, LocationDto>();
+                cfg.CreateMap<LocationBankAccount, LocationBankAccountDto>();
                 cfg.CreateMap<CreateLocation, Location>()
                     .ForMember(x => x.BankAccounts, o => o.Ignore())
                     .IgnoreAllPropertiesWithAnInaccessibleSetter()

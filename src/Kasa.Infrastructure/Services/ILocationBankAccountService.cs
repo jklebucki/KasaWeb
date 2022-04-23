@@ -2,7 +2,7 @@
 
 namespace Kasa.Infrastructure.Services
 {
-    internal interface ILocationBankAccountService
+    public interface ILocationBankAccountService
     {
         Task<int> AddLocationBankAccount(LocationBankAccount locationBankAccount);
         Task UpdateLocationBankAccount(LocationBankAccount locationBankAccount);

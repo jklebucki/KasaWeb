@@ -2,9 +2,9 @@ namespace Kasa.Core.Domain
 {
     public class LocationBankAccount : Entity
     {
-        public int LocationId { get; set; }
-        public string BankName { get; set; }
-        public string BankAccount { get; set; }
+        public int LocationId { get; protected set; }
+        public string BankName { get; protected set; }
+        public string BankAccount { get; protected set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime? UpdatedAt { get; protected set; }
 

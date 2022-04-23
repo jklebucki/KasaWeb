@@ -3,7 +3,7 @@ using Kasa.Core.Repositories;
 
 namespace Kasa.Infrastructure.Services
 {
-    internal class LocationBankAccountService : ILocationBankAccountService
+    public class LocationBankAccountService : ILocationBankAccountService
     {
         private readonly ILocationBankAccountRepository _locationBankAccountRepository;
 
