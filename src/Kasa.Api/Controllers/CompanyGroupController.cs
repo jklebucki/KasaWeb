@@ -7,6 +7,7 @@ namespace Kasa.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class CompanyGroupController : ControllerBase
     {
         private readonly ICompanyGroupService _companyGroupService;
@@ -52,7 +53,7 @@ namespace Kasa.Api.Controllers
                 {
                     var companyGroup = new CompanyGroup(0, create.GroupName);
                     var newCompanyGroupId = await _companyGroupService.AddCompanyGroup(companyGroup);
-                    return Ok($"/CompanyGroup/{newCompanyGroupId}");
+                    return Created($"/CompanyGroup/{newCompanyGroupId}", null);
                 }
                 return BadRequest("Create command is null.");
             }
@@ -68,7 +69,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 await _companyGroupService.DeleteCompanyGroup(id);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -85,7 +86,7 @@ namespace Kasa.Api.Controllers
             {
                 var companyGroup = new CompanyGroup(companyGroupData.Id, companyGroupData.CompanyGroupName);
                 await _companyGroupService.UpdateCompanyGroup(companyGroup);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@ namespace Kasa.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class LocationController : ControllerBase
     {
         private readonly IMapper _mapper;
@@ -68,13 +69,14 @@ namespace Kasa.Api.Controllers
             try
             {
                 await _locationService.DeleteLocation(id);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
         }
+
         [HttpPost]
         public async Task<IActionResult> Create(CreateLocation createLocation)
         {
@@ -82,12 +84,30 @@ namespace Kasa.Api.Controllers
             {
                 var location = _mapper.Map<Location>(createLocation);
                 var newLocationId = await _locationService.AddLocation(location);
-                return Ok($"location/{newLocationId}");
+                return Created($"location/{newLocationId}", null);
             }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(UpdateLocation updateLocation)
+        {
+            if (updateLocation == null)
+                return BadRequest("UpdateLocation command is null");
+            try
+            {
+                var location = _mapper.Map<Location>(updateLocation);
+                await _locationService.UpdateLocation(location);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }

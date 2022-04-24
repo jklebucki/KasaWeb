@@ -10,6 +10,7 @@ namespace Kasa.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class UserController : ControllerBase
     {
         private readonly ISecurityProvider _securityProvider;
@@ -32,7 +33,7 @@ namespace Kasa.Api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return NotFound(ex.Message);
             }
 
         }
@@ -52,7 +53,7 @@ namespace Kasa.Api.Controllers
                 register.Password = await _securityProvider.EncodePassword(register.Password);
                 var user = _mapper.Map<User>(register);
                 var userId = await _userService.CreateAsync(user).ConfigureAwait(false);
-                return Ok($"/User/{userId}");
+                return Created($"/User/{userId}", null);
             }
             catch (Exception ex)
             {
@@ -66,7 +67,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 await _userService.Remove(userId).ConfigureAwait(false);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -83,7 +84,7 @@ namespace Kasa.Api.Controllers
             {
                 var user = _mapper.Map<User>(updateUser);
                 await _userService.Update(user);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -99,7 +100,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 await _userService.ChangePassword(changePassword.Id, changePassword.OldPassword, changePassword.NewPassword);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

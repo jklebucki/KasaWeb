@@ -9,6 +9,7 @@ namespace Kasa.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class CompanyController : ControllerBase
     {
         private readonly ICompanyService _companyService;
@@ -56,7 +57,7 @@ namespace Kasa.Api.Controllers
                 {
                     var company = _mapper.Map<Company>(create);
                     var newCompanyId = await _companyService.AddCompany(company);
-                    return Ok($"/Company/{newCompanyId}");
+                    return Created($"/Company/{newCompanyId}", null);
                 }
                 return BadRequest("Create command is null.");
             }
@@ -72,7 +73,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 await _companyService.DeleteCompany(id);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -89,7 +90,7 @@ namespace Kasa.Api.Controllers
             {
                 var company = _mapper.Map<Company>(updateCompany);
                 await _companyService.UpdateCompany(company);
-                return Ok();
+                return NoContent();
             }
             catch (Exception ex)
             {

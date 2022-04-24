@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\LocationBankAccount\" />
     <Folder Include="Data\" />
   </ItemGroup>
 
