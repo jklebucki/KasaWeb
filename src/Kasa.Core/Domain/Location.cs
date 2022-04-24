@@ -13,7 +13,6 @@
         public string LocationEmail { get; protected set; }
         public string LocationPhone { get; protected set; }
         public string DocumentSeries { get; set; }
-        public IEnumerable<LocationBankAccount> BankAccounts { get; set; }
         public DateTime CreatedAt { get; protected set; }
         public DateTime? UpdatedAt { get; protected set; }
         private Location() { }

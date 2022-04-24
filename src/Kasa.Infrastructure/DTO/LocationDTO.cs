@@ -16,6 +16,5 @@ namespace Kasa.Infrastructure.DTO
         public string LocationEmail { get; set; }
         public string LocationPhone { get; set; }
         public string DocumentSeries { get; set; }
-        public IEnumerable<LocationBankAccount> BankAccounts { get; set; }
     }
 }
