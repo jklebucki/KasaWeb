@@ -17,7 +17,7 @@ namespace Kasa.Api.Controllers
             _companyGroupService = companyGroupService;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             try

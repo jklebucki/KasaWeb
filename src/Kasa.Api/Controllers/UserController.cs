@@ -23,12 +23,12 @@ namespace Kasa.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetUser(int userId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetUser(int id)
         {
             try
             {
-                var user = await _userService.GetAsync(userId).ConfigureAwait(false);
+                var user = await _userService.GetAsync(id).ConfigureAwait(false);
                 return Ok(_mapper.Map<UserDto>(user));
             }
             catch (Exception ex)

@@ -20,7 +20,7 @@ namespace Kasa.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetCompany(int id)
         {
             try

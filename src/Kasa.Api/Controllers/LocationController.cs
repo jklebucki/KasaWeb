@@ -21,7 +21,7 @@ namespace Kasa.Api.Controllers
             _locationService = locationService;
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             try
