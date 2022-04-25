@@ -1,10 +1,10 @@
 ﻿namespace Kasa.Infrastructure.DTO
 {
-    public class LocationBankAccountDto
+    public class BankAccountDto
     {
         public int Id { get; set; }
-        public int LocationId { get; set; }
+        public int SourceId { get; set; }
         public string BankName { get; set; }
-        public string BankAccount { get; set; }
+        public string BankAccountNumber { get; set; }
     }
 }

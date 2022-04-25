@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Kasa.Infrastructure.Migrations
+namespace Kasa.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(KasaDbContext))]
     partial class KasaDbContextModelSnapshot : ModelSnapshot
@@ -18,6 +18,37 @@ namespace Kasa.Infrastructure.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("Kasa.Core.Domain.BankAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("AccountOwner")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BankAccountNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("BankName")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("SourceId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BankAccounts");
+                });
 
             modelBuilder.Entity("Kasa.Core.Domain.Company", b =>
                 {
@@ -152,36 +183,6 @@ namespace Kasa.Infrastructure.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("Kasa.Core.Domain.LocationBankAccount", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("BankAccount")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("BankName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<int>("LocationId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime(6)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LocationId");
-
-                    b.ToTable("LocationBankAccounts");
-                });
-
             modelBuilder.Entity("Kasa.Core.Domain.User", b =>
                 {
                     b.Property<int>("Id")
@@ -235,23 +236,9 @@ namespace Kasa.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Kasa.Core.Domain.LocationBankAccount", b =>
-                {
-                    b.HasOne("Kasa.Core.Domain.Location", null)
-                        .WithMany("BankAccounts")
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Kasa.Core.Domain.Company", b =>
                 {
                     b.Navigation("Locations");
-                });
-
-            modelBuilder.Entity("Kasa.Core.Domain.Location", b =>
-                {
-                    b.Navigation("BankAccounts");
                 });
 #pragma warning restore 612, 618
         }

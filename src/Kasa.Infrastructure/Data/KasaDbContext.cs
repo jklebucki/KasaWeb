@@ -10,7 +10,7 @@ namespace Kasa.Infrastructure.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<CompanyGroup> CompanyGroups { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<LocationBankAccount> LocationBankAccounts { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
         public KasaDbContext() { }
         public KasaDbContext(DbContextOptions<KasaDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -2,7 +2,7 @@ using AutoMapper;
 using Kasa.Core.Domain;
 using Kasa.Infrastructure.Commands.Company;
 using Kasa.Infrastructure.Commands.Location;
-using Kasa.Infrastructure.Commands.LocationBankAccount;
+using Kasa.Infrastructure.Commands.BankAccount;
 using Kasa.Infrastructure.Commands.Users;
 using Kasa.Infrastructure.DTO;
 
@@ -32,12 +32,12 @@ namespace Kasa.Infrastructure.AutoMapper
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore())
                     .ForMember(x => x.Id, o => o.Ignore());
-                cfg.CreateMap<LocationBankAccount, LocationBankAccountDto>();
-                cfg.CreateMap<CreateLocationBankAccount, LocationBankAccount>()
+                cfg.CreateMap<BankAccount, BankAccountDto>();
+                cfg.CreateMap<CreateBankAccount, BankAccount>()
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore())
                     .ForMember(x => x.Id, o => o.Ignore());
-                cfg.CreateMap<UpdateLocationBankAccount, LocationBankAccount>()
+                cfg.CreateMap<UpdateBankAccount, BankAccount>()
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore());
                 cfg.CreateMap<UpdateCompany, Company>()

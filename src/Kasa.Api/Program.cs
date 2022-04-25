@@ -21,8 +21,8 @@ builder.Services.AddScoped<ICompanyGroupRepository, CompanyGroupRepository>();
 builder.Services.AddScoped<ICompanyGroupService, CompanyGroupService>();
 builder.Services.AddScoped<ILocationRepository, LocationRepository>();
 builder.Services.AddScoped<ILocationService, LocationService>();
-builder.Services.AddScoped<ILocationBankAccountRepository, LocationBankAccountRepository>();
-builder.Services.AddScoped<ILocationBankAccountService, LocationBankAccountService>();
+builder.Services.AddScoped<IBankAccountRepository, BankAccountRepository>();
+builder.Services.AddScoped<IBankAccountService, BankAccountService>();
 //security
 builder.Services.AddScoped<ISecurityProvider, SecurityProviderBase>();
 builder.Services.AddSingleton(AutoMapperConfig.InitAutoMapper());
