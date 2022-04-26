@@ -10,8 +10,6 @@ namespace Kasa.Core.Domain
         public string? LastName { get; protected set; }
         public string Email { get; protected set; }
         public string Password { get; protected set; }
-        public DateTime CreatedAt { get; protected set; }
-        public DateTime UpdatedAt { get; protected set; }
         private User() { }
         public User(int companyGroupId,
                     string role,

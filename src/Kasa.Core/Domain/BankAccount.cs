@@ -7,8 +7,6 @@ namespace Kasa.Core.Domain
         public AccountOwner AccountOwner { get; protected set; }
         public string BankName { get; protected set; }
         public string BankAccountNumber { get; protected set; }
-        public DateTime CreatedAt { get; protected set; }
-        public DateTime? UpdatedAt { get; protected set; }
         private BankAccount() { }
 
         public BankAccount(int sourceId, AccountOwner accountOwner, string bankName, string bankAccountNumber)
@@ -17,7 +15,7 @@ namespace Kasa.Core.Domain
             SetAccountOwner(accountOwner);
             SetName(bankName);
             SetBankAccount(bankAccountNumber);
-            CreatedAt = DateTime.UtcNow;
+            SetCreatedAt();
         }
 
         private void SetSourceId(int sourceId)
@@ -46,7 +44,7 @@ namespace Kasa.Core.Domain
             SetAccountOwner(accountOwner);
             SetName(bankName);
             SetBankAccount(bankAccount);
-            UpdatedAt = DateTime.UtcNow;
+            SetUpdatedAt();
         }
     }
 }

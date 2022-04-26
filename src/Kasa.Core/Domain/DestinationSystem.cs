@@ -26,6 +26,7 @@ namespace Kasa.Core.Domain
             SetDestinationSystemSchema(destinationSystemSchema);
             SetDestinationSystemUser(destinationSystemUser);
             SetDestinationSystemPassword(destinationSystemPassword);
+            SetCreatedAt();
         }
 
         private void SetDestinationName(string destinationName)

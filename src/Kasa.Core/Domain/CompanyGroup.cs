@@ -8,6 +8,7 @@ namespace Kasa.Core.Domain
         {
             SetId(id);
             SetGroupName(groupName);
+            SetCreatedAt();
         }
 
         public void Update(string groupName)
@@ -15,6 +16,7 @@ namespace Kasa.Core.Domain
             if (string.IsNullOrWhiteSpace(groupName))
                 throw new Exception($"Company group can not have an empty name.");
             GroupName = groupName;
+            SetUpdatedAt();
         }
 
         private void SetId(int? id)

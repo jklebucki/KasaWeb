@@ -14,8 +14,6 @@ namespace Kasa.Core.Domain
         public string Country { get; protected set; }
         public string CompanyEmail { get; protected set; }
         public string CompanyPhone { get; protected set; }
-        public DateTime CreatedAt { get; protected set; }
-        public DateTime? UpdatedAt { get; protected set; }
         public IEnumerable<Location> Locations { get; protected set; }
         private Company() { }
         public Company(int id,
@@ -41,7 +39,7 @@ namespace Kasa.Core.Domain
             SetCountry(country);
             SetCompanyEmail(companyEmail);
             SetCompanyPhone(companyPhone);
-            CreatedAt = DateTime.UtcNow;
+            SetCreatedAt();
         }
 
         public void Update(int companyGroupId,
@@ -65,7 +63,7 @@ namespace Kasa.Core.Domain
             SetCountry(country);
             SetCompanyEmail(companyEmail);
             SetCompanyPhone(companyPhone);
-            UpdatedAt = DateTime.UtcNow;
+            SetUpdatedAt();
         }
         private void SetId(int id)
         {
