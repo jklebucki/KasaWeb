@@ -1,8 +1,8 @@
 using AutoMapper;
 using Kasa.Core.Domain;
+using Kasa.Infrastructure.Commands.BankAccount;
 using Kasa.Infrastructure.Commands.Company;
 using Kasa.Infrastructure.Commands.Location;
-using Kasa.Infrastructure.Commands.BankAccount;
 using Kasa.Infrastructure.Commands.Users;
 using Kasa.Infrastructure.DTO;
 

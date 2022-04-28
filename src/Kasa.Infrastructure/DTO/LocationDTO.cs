@@ -1,6 +1,4 @@
-﻿using Kasa.Core.Domain;
-
-namespace Kasa.Infrastructure.DTO
+﻿namespace Kasa.Infrastructure.DTO
 {
     public class LocationDto
     {
