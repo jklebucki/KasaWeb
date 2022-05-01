@@ -2,7 +2,6 @@
 {
     public class Location : Entity
     {
-        public int CompanyId { get; set; }
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public string Street { get; protected set; }
@@ -13,6 +12,11 @@
         public string LocationEmail { get; protected set; }
         public string LocationPhone { get; protected set; }
         public string DocumentSeries { get; set; }
+
+        public int CompanyId { get; set; }
+        public Company Company { get; set; }
+        public ICollection<CashPoint> CashPoint { get; set; }
+
         private Location() { }
 
         public Location(int companyId,

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kasa.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(KasaDbContext))]
-    [Migration("20220425152319_Initial")]
+    [Migration("20220501170452_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,86 @@ namespace Kasa.Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BankAccounts");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.CashOperation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("CashPointId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Clearing")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreditSideAccount")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("DebitSideAccount")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("OperationType")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CashPointId");
+
+                    b.ToTable("CashOperations");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.CashPoint", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("AccountingAccountNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("DocumentSymbol")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<bool>("IsCurrecy")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsFifo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LocationId");
+
+                    b.ToTable("CashPoints");
                 });
 
             modelBuilder.Entity("Kasa.Core.Domain.Company", b =>
@@ -105,6 +185,8 @@ namespace Kasa.Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CompanyGroupId");
+
                     b.ToTable("Companies");
                 });
 
@@ -114,9 +196,15 @@ namespace Kasa.Infrastructure.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("GroupName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
 
@@ -218,7 +306,7 @@ namespace Kasa.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("Id");
@@ -229,18 +317,68 @@ namespace Kasa.Infrastructure.Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Kasa.Core.Domain.Location", b =>
+            modelBuilder.Entity("Kasa.Core.Domain.CashOperation", b =>
                 {
-                    b.HasOne("Kasa.Core.Domain.Company", null)
-                        .WithMany("Locations")
-                        .HasForeignKey("CompanyId")
+                    b.HasOne("Kasa.Core.Domain.CashPoint", "CashPoint")
+                        .WithMany("CashOperation")
+                        .HasForeignKey("CashPointId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CashPoint");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.CashPoint", b =>
+                {
+                    b.HasOne("Kasa.Core.Domain.Location", "Location")
+                        .WithMany("CashPoint")
+                        .HasForeignKey("LocationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("Kasa.Core.Domain.Company", b =>
                 {
-                    b.Navigation("Locations");
+                    b.HasOne("Kasa.Core.Domain.CompanyGroup", "CompanyGroup")
+                        .WithMany("Company")
+                        .HasForeignKey("CompanyGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CompanyGroup");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.Location", b =>
+                {
+                    b.HasOne("Kasa.Core.Domain.Company", "Company")
+                        .WithMany("Location")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.CashPoint", b =>
+                {
+                    b.Navigation("CashOperation");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.Company", b =>
+                {
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.CompanyGroup", b =>
+                {
+                    b.Navigation("Company");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.Location", b =>
+                {
+                    b.Navigation("CashPoint");
                 });
 #pragma warning restore 612, 618
         }

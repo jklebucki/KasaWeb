@@ -4,7 +4,6 @@ namespace Kasa.Core.Domain
 {
     public class Company : Entity
     {
-        public int CompanyGroupId { get; protected set; }
         public string Name { get; protected set; }
         public string Description { get; protected set; }
         public string Street { get; protected set; }
@@ -14,7 +13,10 @@ namespace Kasa.Core.Domain
         public string Country { get; protected set; }
         public string CompanyEmail { get; protected set; }
         public string CompanyPhone { get; protected set; }
-        public IEnumerable<Location> Locations { get; protected set; }
+
+        public int CompanyGroupId { get; protected set; }
+        public CompanyGroup CompanyGroup { get; set; }
+        public ICollection<Location> Location { get; set; }
         private Company() { }
         public Company(int id,
                        int companyGroupId,

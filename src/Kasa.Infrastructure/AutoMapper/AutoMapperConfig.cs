@@ -26,9 +26,13 @@ namespace Kasa.Infrastructure.AutoMapper
                 cfg.CreateMap<Company, CompanyDto>();
                 cfg.CreateMap<Location, LocationDto>();
                 cfg.CreateMap<UpdateLocation, Location>()
+                    .ForMember(x => x.Company, o => o.Ignore())
+                    .ForMember(x => x.CashPoint, o => o.Ignore())
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore());
                 cfg.CreateMap<CreateLocation, Location>()
+                    .ForMember(x => x.Company, o => o.Ignore())
+                    .ForMember(x => x.CashPoint, o => o.Ignore())
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore())
                     .ForMember(x => x.Id, o => o.Ignore());
@@ -41,13 +45,15 @@ namespace Kasa.Infrastructure.AutoMapper
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore());
                 cfg.CreateMap<UpdateCompany, Company>()
+                    .ForMember(x => x.CompanyGroup, o => o.Ignore())
+                    .ForMember(x => x.Location, o => o.Ignore())
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
-                    .ForMember(x => x.UpdatedAt, o => o.Ignore())
-                    .ForMember(x => x.Locations, o => o.Ignore());
+                    .ForMember(x => x.UpdatedAt, o => o.Ignore());
                 cfg.CreateMap<CreateCompany, Company>()
+                    .ForMember(x => x.CompanyGroup, o => o.Ignore())
+                    .ForMember(x => x.Location, o => o.Ignore())
                     .ForMember(x => x.CreatedAt, o => o.Ignore())
                     .ForMember(x => x.UpdatedAt, o => o.Ignore())
-                    .ForMember(x => x.Locations, o => o.Ignore())
                     .ForMember(x => x.Id, o => o.Ignore());
             });
             configuration.AssertConfigurationIsValid();
