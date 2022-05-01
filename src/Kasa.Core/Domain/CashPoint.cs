@@ -11,6 +11,7 @@
         public int LocationId { get; set; }
         public Location Location { get; set; }
         public ICollection<CashOperation> CashOperation { get; set; }
+        public ICollection<Document> Document { get; set; }
 
 
         private CashPoint() { }

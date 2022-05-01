@@ -13,6 +13,8 @@ namespace Kasa.Infrastructure.Data
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<CashPoint> CashPoints { get; set; }
         public DbSet<CashOperation> CashOperations { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<DocumentItem> DocumentItems { get; set; }
         public KasaDbContext() { }
         public KasaDbContext(DbContextOptions<KasaDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

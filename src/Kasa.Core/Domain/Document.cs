@@ -2,7 +2,8 @@
 {
     public class Document : Entity
     {
-        public int CompanyGroupId { get; set; }
-        public int CompanyId { get; set; }
+        public int CachePointId { get; protected set; }
+        public CashPoint CashPoint { get; set; }
+        public ICollection<DocumentItem> DocumentItem { get; set; }
     }
 }

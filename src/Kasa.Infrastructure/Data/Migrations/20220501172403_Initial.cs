@@ -221,6 +221,52 @@ namespace Kasa.Infrastructure.Data.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Documents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    CachePointId = table.Column<int>(type: "int", nullable: false),
+                    CashPointId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Documents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Documents_CashPoints_CashPointId",
+                        column: x => x.CashPointId,
+                        principalTable: "CashPoints",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "DocumentItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    DcumentId = table.Column<int>(type: "int", nullable: false),
+                    DocumentId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DocumentItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DocumentItems_Documents_DocumentId",
+                        column: x => x.DocumentId,
+                        principalTable: "Documents",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_CashOperations_CashPointId",
                 table: "CashOperations",
@@ -235,6 +281,16 @@ namespace Kasa.Infrastructure.Data.Migrations
                 name: "IX_Companies_CompanyGroupId",
                 table: "Companies",
                 column: "CompanyGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DocumentItems_DocumentId",
+                table: "DocumentItems",
+                column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Documents_CashPointId",
+                table: "Documents",
+                column: "CashPointId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_CompanyId",
@@ -257,7 +313,13 @@ namespace Kasa.Infrastructure.Data.Migrations
                 name: "CashOperations");
 
             migrationBuilder.DropTable(
+                name: "DocumentItems");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Documents");
 
             migrationBuilder.DropTable(
                 name: "CashPoints");
