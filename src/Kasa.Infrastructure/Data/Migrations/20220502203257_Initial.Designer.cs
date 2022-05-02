@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kasa.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(KasaDbContext))]
-    [Migration("20220501172403_Initial")]
+    [Migration("20220502203257_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -211,6 +211,77 @@ namespace Kasa.Infrastructure.Data.Migrations
                     b.ToTable("CompanyGroups");
                 });
 
+            modelBuilder.Entity("Kasa.Core.Domain.Contractor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("ContractorErpId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ContractorErpPosition")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("EstateNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("QuartersNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Regon")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("VatId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Contractors");
+                });
+
             modelBuilder.Entity("Kasa.Core.Domain.Document", b =>
                 {
                     b.Property<int>("Id")
@@ -234,6 +305,82 @@ namespace Kasa.Infrastructure.Data.Migrations
                     b.HasIndex("CashPointId");
 
                     b.ToTable("Documents");
+                });
+
+            modelBuilder.Entity("Kasa.Core.Domain.DocumentContractor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("ContractorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("DocumentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("EstateNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Province")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("QuartersNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Regon")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("VatId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractorId");
+
+                    b.HasIndex("DocumentId")
+                        .IsUnique();
+
+                    b.ToTable("DocumentContractors");
                 });
 
             modelBuilder.Entity("Kasa.Core.Domain.DocumentItem", b =>
@@ -411,6 +558,25 @@ namespace Kasa.Infrastructure.Data.Migrations
                     b.Navigation("CashPoint");
                 });
 
+            modelBuilder.Entity("Kasa.Core.Domain.DocumentContractor", b =>
+                {
+                    b.HasOne("Kasa.Core.Domain.Contractor", "Contractor")
+                        .WithMany("DocumentContractor")
+                        .HasForeignKey("ContractorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Kasa.Core.Domain.Document", "Document")
+                        .WithOne("DocumentContractor")
+                        .HasForeignKey("Kasa.Core.Domain.DocumentContractor", "DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contractor");
+
+                    b.Navigation("Document");
+                });
+
             modelBuilder.Entity("Kasa.Core.Domain.DocumentItem", b =>
                 {
                     b.HasOne("Kasa.Core.Domain.Document", "Document")
@@ -450,8 +616,16 @@ namespace Kasa.Infrastructure.Data.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("Kasa.Core.Domain.Contractor", b =>
+                {
+                    b.Navigation("DocumentContractor");
+                });
+
             modelBuilder.Entity("Kasa.Core.Domain.Document", b =>
                 {
+                    b.Navigation("DocumentContractor")
+                        .IsRequired();
+
                     b.Navigation("DocumentItem");
                 });
 
