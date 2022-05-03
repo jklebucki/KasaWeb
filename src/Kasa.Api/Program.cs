@@ -10,8 +10,7 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration;
 var connectionString = configuration.GetConnectionString("MySqlConnection");
-var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
-builder.Services.AddDbContext<KasaDbContext>(options => options.UseMySql(connectionString, serverVersion));
+builder.Services.AddDbContext<KasaDbContext>(options => options.UseNpgsql(connectionString));
 // services & repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();

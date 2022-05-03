@@ -16,6 +16,5 @@
         public string Phone { get; set; }
         public string Email { get; set; }
         public string CountryCode { get; set; }
-        public ICollection<DocumentContractor> DocumentContractor { get; set; }
     }
 }

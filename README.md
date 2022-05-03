@@ -6,6 +6,4 @@ Current stack:
 
 * .net core 6
 * Angular
-* MariaDB (MySQL)
-
-
+* PostgreSQL

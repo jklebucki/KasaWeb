@@ -16,7 +16,6 @@ namespace Kasa.Infrastructure.Data
         public DbSet<Contractor> Contractors { get; set; }
         public DbSet<Document> Documents { get; set; }
         public DbSet<DocumentItem> DocumentItems { get; set; }
-        public DbSet<DocumentContractor> DocumentContractors { get; set; }
         public KasaDbContext() { }
         public KasaDbContext(DbContextOptions<KasaDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -26,9 +25,9 @@ namespace Kasa.Infrastructure.Data
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
+            //var serverVersion = new MySqlServerVersion(new Version(8, 0, 27));
             var connectionString = configuration.GetConnectionString("MySqlConnection");
-            optionsBuilder.UseMySql(connectionString, serverVersion);
+            optionsBuilder.UseNpgsql(connectionString);
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,10 +35,6 @@ namespace Kasa.Infrastructure.Data
             modelBuilder.Entity<User>()
                 .HasIndex(b => b.Email)
                 .IsUnique(true);
-            modelBuilder.Entity<Document>()
-                .HasOne(dc => dc.DocumentContractor)
-                .WithOne(d => d.Document)
-                .HasForeignKey<DocumentContractor>(d => d.DocumentId);
         }
     }
 }

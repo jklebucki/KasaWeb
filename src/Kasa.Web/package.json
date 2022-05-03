@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "reinstall-node-modules": "^2.0.0"
+  },
+  "dependencies": {
+    "@nguniversal/module-map-ngfactory-loader": "^8.2.6"
+  }
+}
