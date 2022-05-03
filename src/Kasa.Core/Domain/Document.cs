@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Kasa.Core.Domain
+﻿namespace Kasa.Core.Domain
 {
     public class Document : Entity
     {

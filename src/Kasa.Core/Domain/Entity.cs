@@ -11,7 +11,7 @@
         }
         internal void SetUpdatedAt()
         {
-            CreatedAt = DateTime.UtcNow;
+            UpdatedAt = DateTime.UtcNow;
         }
     }
 }

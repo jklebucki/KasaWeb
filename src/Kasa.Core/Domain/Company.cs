@@ -18,8 +18,7 @@ namespace Kasa.Core.Domain
         public CompanyGroup CompanyGroup { get; set; }
         public ICollection<Location> Location { get; set; }
         private Company() { }
-        public Company(int id,
-                       int companyGroupId,
+        public Company(int companyGroupId,
                        string name,
                        string description,
                        string street,
@@ -30,7 +29,6 @@ namespace Kasa.Core.Domain
                        string companyEmail,
                        string companyPhone)
         {
-            SetId(id);
             SetCompanyGroupId(companyGroupId);
             SetName(name);
             SetDescription(description);
@@ -66,10 +64,6 @@ namespace Kasa.Core.Domain
             SetCompanyEmail(companyEmail);
             SetCompanyPhone(companyPhone);
             SetUpdatedAt();
-        }
-        private void SetId(int id)
-        {
-            Id = id;
         }
         private void SetCompanyGroupId(int companyGroupId)
         {
