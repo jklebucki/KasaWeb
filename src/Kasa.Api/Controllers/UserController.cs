@@ -48,6 +48,8 @@ namespace Kasa.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUser([FromBody] Register register)
         {
+            if (register == null)
+                return BadRequest("Command Register is null.");
             try
             {
                 register.Password = await _securityProvider.EncodePassword(register.Password);

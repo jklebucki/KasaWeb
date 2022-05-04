@@ -49,17 +49,15 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCompany(CreateCompany create)
+        public async Task<IActionResult> AddCompany([FromBody] CreateCompany create)
         {
+            if (create != null)
+                return BadRequest("Create command is null.");
             try
             {
-                if (create != null)
-                {
-                    var company = _mapper.Map<Company>(create);
-                    var newCompanyId = await _companyService.AddCompany(company);
-                    return Created($"/Company/{newCompanyId}", null);
-                }
-                return BadRequest("Create command is null.");
+                var company = _mapper.Map<Company>(create);
+                var newCompanyId = await _companyService.AddCompany(company);
+                return Created($"/Company/{newCompanyId}", null);
             }
             catch (Exception ex)
             {
@@ -82,7 +80,7 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateCompany(UpdateCompany updateCompany)
+        public async Task<IActionResult> UpdateCompany([FromBody] UpdateCompany updateCompany)
         {
             if (updateCompany == null)
                 return BadRequest("UpdateCommand is null.");

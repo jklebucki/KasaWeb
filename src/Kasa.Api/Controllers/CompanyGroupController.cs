@@ -45,17 +45,17 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddCompanyGroup(CreateComapanyGroup create)
+        public async Task<IActionResult> AddCompanyGroup([FromBody] CreateComapanyGroup create)
         {
+            if (create == null)
+                return BadRequest("Create command is null.");
             try
             {
-                if (create != null)
-                {
-                    var companyGroup = new CompanyGroup(0, create.GroupName);
-                    var newCompanyGroupId = await _companyGroupService.AddCompanyGroup(companyGroup);
-                    return Created($"/CompanyGroup/{newCompanyGroupId}", null);
-                }
-                return BadRequest("Create command is null.");
+
+                var companyGroup = new CompanyGroup(0, create.GroupName);
+                var newCompanyGroupId = await _companyGroupService.AddCompanyGroup(companyGroup);
+                return Created($"/CompanyGroup/{newCompanyGroupId}", null);
+
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> PutCompanyGroup(UpdateCompanyGroup companyGroupData)
+        public async Task<IActionResult> PutCompanyGroup([FromBody] UpdateCompanyGroup companyGroupData)
         {
             if (companyGroupData == null)
                 return BadRequest("Company group object is null.");

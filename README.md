@@ -7,3 +7,5 @@ Current stack:
 * .net core 6
 * Angular
 * PostgreSQL
+
+

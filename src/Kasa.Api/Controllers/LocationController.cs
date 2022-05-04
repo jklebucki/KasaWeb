@@ -78,8 +78,10 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateLocation createLocation)
+        public async Task<IActionResult> Create([FromBody] CreateLocation createLocation)
         {
+            if (createLocation == null)
+                return BadRequest("CreateLocation command is null");
             try
             {
                 var location = _mapper.Map<Location>(createLocation);
@@ -93,7 +95,7 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(UpdateLocation updateLocation)
+        public async Task<IActionResult> Update([FromBody] UpdateLocation updateLocation)
         {
             if (updateLocation == null)
                 return BadRequest("UpdateLocation command is null");

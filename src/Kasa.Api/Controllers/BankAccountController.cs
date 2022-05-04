@@ -73,7 +73,7 @@ namespace Kasa.Api.Controllers
             }
         }
         [HttpPut]
-        public async Task<IActionResult> Update(CreateBankAccount createBankAccount)
+        public async Task<IActionResult> Update([FromBody] CreateBankAccount createBankAccount)
         {
             if (createBankAccount == null)
                 return BadRequest("CreateBankAccount command is null");
