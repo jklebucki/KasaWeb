@@ -12,13 +12,14 @@
         "stopAtEntry": false,
         "serverReadyAction": {
             "action": "openExternally",
-            "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            "pattern": "\\bNow listening on:\\s+(https?://\\S+)",
+            "uriFormat": "%s/swagger"
         },
         "env": {
             "ASPNETCORE_ENVIRONMENT": "Development"
         },
         "sourceFileMap": {
-            "/Views": "${workspaceFolder}/Views"
+            "/Views": "${workspaceFolder}/src/Kasa.Api/Views"
         }
     },
         {
@@ -43,7 +44,7 @@
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
             "sourceFileMap": {
-                "/Views": "${workspaceFolder}/Views"
+                "/Views": "${workspaceFolder}/src/Kasa.Web/Views"
             }
         },
         {
