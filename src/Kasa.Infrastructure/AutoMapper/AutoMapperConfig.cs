@@ -24,6 +24,7 @@ namespace Kasa.Infrastructure.AutoMapper
                     .ForMember(x => x.UpdatedAt, o => o.Ignore())
                     .ForMember(x => x.Password, o => o.Ignore());
                 cfg.CreateMap<Company, CompanyDto>();
+                cfg.CreateMap<CompanyGroup, CompanyGroupDto>();
                 cfg.CreateMap<Location, LocationDto>();
                 cfg.CreateMap<UpdateLocation, Location>()
                     .ForMember(x => x.Company, o => o.Ignore())

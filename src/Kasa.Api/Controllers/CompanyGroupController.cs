@@ -1,5 +1,7 @@
-﻿using Kasa.Core.Domain;
+﻿using AutoMapper;
+using Kasa.Core.Domain;
 using Kasa.Infrastructure.Commands.CompanyGroup;
+using Kasa.Infrastructure.DTO;
 using Kasa.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,9 +13,11 @@ namespace Kasa.Api.Controllers
     public class CompanyGroupController : ControllerBase
     {
         private readonly ICompanyGroupService _companyGroupService;
+        private readonly IMapper _mapper;
 
-        public CompanyGroupController(ICompanyGroupService companyGroupService)
+        public CompanyGroupController(ICompanyGroupService companyGroupService, IMapper mapper)
         {
+            _mapper = mapper;
             _companyGroupService = companyGroupService;
         }
 
@@ -23,7 +27,7 @@ namespace Kasa.Api.Controllers
             try
             {
                 var companyGroup = await _companyGroupService.GetCompanyGroupById(id);
-                return Ok(companyGroup);
+                return Ok(_mapper.Map<CompanyGroupDto>(companyGroup));
             }
             catch (Exception ex)
             {
@@ -35,8 +39,8 @@ namespace Kasa.Api.Controllers
         {
             try
             {
-                var companyGroup = await _companyGroupService.GetCompanyGroupByName(groupName);
-                return Ok(companyGroup);
+                var companyGroups = await _companyGroupService.GetCompanyGroupByName(groupName);
+                return Ok(_mapper.Map<IEnumerable<CompanyGroupDto>>(companyGroups));
             }
             catch (Exception ex)
             {
