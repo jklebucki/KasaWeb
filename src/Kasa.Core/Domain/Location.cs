@@ -1,16 +1,28 @@
-﻿namespace Kasa.Core.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Kasa.Core.Domain
 {
     public class Location : Entity
     {
+        [MaxLength(200)]
         public string Name { get; protected set; }
+        [MaxLength(200)]
         public string Description { get; protected set; }
+        [MaxLength(200)]
         public string Street { get; protected set; }
+        [MaxLength(200)]
         public string Place { get; protected set; }
+        [MaxLength(20)]
         public string ZipCode { get; protected set; }
-        public string District { get; protected set; }
+        [MaxLength(100)]
+        public string Province { get; protected set; }
+        [MaxLength(50)]
         public string Country { get; protected set; }
+        [MaxLength(100)]
         public string LocationEmail { get; protected set; }
+        [MaxLength(30)]
         public string LocationPhone { get; protected set; }
+        [MaxLength(15)]
         public string DocumentSeries { get; set; }
 
         public int CompanyId { get; set; }
@@ -101,9 +113,9 @@
             ZipCode = zipCode;
         }
 
-        private void SetDistrict(string district)
+        private void SetDistrict(string province)
         {
-            District = district;
+            Province = province;
         }
 
         private void SetCountry(string country)

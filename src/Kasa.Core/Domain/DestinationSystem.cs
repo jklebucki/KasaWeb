@@ -1,13 +1,21 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Kasa.Core.Domain
 {
     public class DestinationSystem : Entity
     {
+        [MaxLength(200)]
         public string DestinationName { get; set; }
+        [MaxLength(200)]
         public string DestinationSystemType { get; set; }
+        [MaxLength(200)]
         public string DestinationSystemLocation { get; set; }
+        [MaxLength(200)]
         public string DestinationSystemDatabase { get; set; }
         public string DestinationSystemSchema { get; set; }
+        [MaxLength(100)]
         public string DestinationSystemUser { get; set; }
+        [MaxLength(200)]
         public string DestinationSystemPassword { get; set; }
 
         private DestinationSystem() { }

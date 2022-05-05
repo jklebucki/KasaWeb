@@ -1,11 +1,16 @@
-﻿namespace Kasa.Core.Domain
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Kasa.Core.Domain
 {
     public class CashPoint : Entity
     {
+        [MaxLength(200)]
         public string Name { get; protected set; }
+        [MaxLength(20)]
         public string DocumentSymbol { get; protected set; }
         public bool IsFifo { get; protected set; }
         public bool IsCurrecy { get; protected set; }
+        [MaxLength(100)]
         public string AccountingAccountNumber { get; protected set; }
 
         public int LocationId { get; set; }
