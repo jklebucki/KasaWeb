@@ -1,14 +1,21 @@
+using System.ComponentModel.DataAnnotations;
 using Kasa.Core.Extensions;
 namespace Kasa.Core.Domain
 {
     public class User : Entity
     {
         public int CompanyGroupId { get; protected set; }
+        [MaxLength(25)]
         public string Role { get; protected set; }
+        [MaxLength(100)]
         public string? Name { get; protected set; }
+        [MaxLength(100)]
         public string? FirstName { get; protected set; }
+        [MaxLength(100)]
         public string? LastName { get; protected set; }
+        [MaxLength(100)]
         public string Email { get; protected set; }
+        [MaxLength(100)]
         public string Password { get; protected set; }
         private User() { }
         public User(int companyGroupId,

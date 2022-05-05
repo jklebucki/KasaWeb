@@ -61,7 +61,7 @@ namespace Kasa.Infrastructure.Repositories
                                            company.Street,
                                            company.Place,
                                            company.ZipCode,
-                                           company.District,
+                                           company.Province,
                                            company.Country,
                                            company.CompanyEmail,
                                            company.CompanyPhone);

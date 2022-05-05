@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Kasa.Core.Domain
 {
     public enum AccountOwner { Location = 1, Contractor = 2 }
@@ -5,7 +7,9 @@ namespace Kasa.Core.Domain
     {
         public int SourceId { get; protected set; }
         public AccountOwner AccountOwner { get; protected set; }
+        [MaxLength(200)]
         public string BankName { get; protected set; }
+        [MaxLength(50)]
         public string BankAccountNumber { get; protected set; }
         private BankAccount() { }
 

@@ -64,7 +64,7 @@ namespace Kasa.Infrastructure.Repositories
                                         location.Street,
                                         location.Place,
                                         location.ZipCode,
-                                        location.District,
+                                        location.Province,
                                         location.Country,
                                         location.LocationEmail,
                                         location.LocationPhone,
