@@ -67,14 +67,14 @@ namespace Kasa.Core.Domain
 
         private void SetDocumentNumber(int documentNumber)
         {
-            if(documentNumber < 0)
+            if (documentNumber < 0)
                 throw new Exception("The document number cannot be less than zero.");
             DocumentNumber = documentNumber;
         }
 
         private void SetDocumentSeries(string documentSeries)
         {
-            if(string.IsNullOrWhiteSpace(documentSeries))
+            if (string.IsNullOrWhiteSpace(documentSeries))
                 throw new Exception("The document series cannot be empty.");
             DocumentSeries = documentSeries;
         }

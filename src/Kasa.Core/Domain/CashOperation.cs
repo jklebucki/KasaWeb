@@ -47,7 +47,7 @@ namespace Kasa.Core.Domain
 
         private void SetName(string name)
         {
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
                 throw new Exception("The operation name cannot be empty.");
             Name = name;
         }
