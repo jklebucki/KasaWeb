@@ -27,9 +27,9 @@ namespace Kasa.Infrastructure.Services
             return await _bankAccountRepository.GetById(bankAccountId);
         }
 
-        public async Task<IEnumerable<BankAccount>> GetBankAccountsBySourceId(int sourceId, AccountOwner accountOwner)
+        public async Task<IEnumerable<BankAccount>> GetBankAccountsBySourceId(int sourceId, AccountOwnerType accountOwnerType)
         {
-            return await _bankAccountRepository.GetBankAccounts(sourceId, accountOwner);
+            return await _bankAccountRepository.GetBankAccounts(sourceId, accountOwnerType);
         }
 
         public async Task UpdateBankAccount(BankAccount bankAccount)

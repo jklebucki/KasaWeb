@@ -8,6 +8,6 @@ namespace Kasa.Infrastructure.Services
         Task UpdateBankAccount(BankAccount bankAccount);
         Task DeleteBankAccount(int bankAccountId);
         Task<BankAccount> GetBankAccountById(int bankAccountId);
-        Task<IEnumerable<BankAccount>> GetBankAccountsBySourceId(int sourceId, AccountOwner accountOwner);
+        Task<IEnumerable<BankAccount>> GetBankAccountsBySourceId(int sourceId, AccountOwnerType accountOwnerType);
     }
 }

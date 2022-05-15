@@ -36,10 +36,10 @@ namespace Kasa.Api.Controllers
         }
 
         [HttpGet]
-        [Route("BankAccounts/{sourceId}/{accountOwner}")]
-        public async Task<IActionResult> GetBySourceId(int sourceId, AccountOwner accountOwner)
+        [Route("BankAccounts/{sourceId}/{accountOwnerType}")]
+        public async Task<IActionResult> GetBySourceId(int sourceId, AccountOwnerType accountOwnerType)
         {
-            var bankAccounts = await _bankAccountService.GetBankAccountsBySourceId(sourceId, accountOwner);
+            var bankAccounts = await _bankAccountService.GetBankAccountsBySourceId(sourceId, accountOwnerType);
             return Ok(_mapper.Map<List<BankAccountDto>>(bankAccounts));
         }
 

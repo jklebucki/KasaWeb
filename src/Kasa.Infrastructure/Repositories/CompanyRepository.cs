@@ -86,15 +86,9 @@ namespace Kasa.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Company>> GetByName(string companyName)
-        {
-            var companies = await _kasaDbContext.Companies.Where(c => c.Name.ToLower().Contains(companyName.ToLower())).ToListAsync();
-            return companies;
-        }
+            => await _kasaDbContext.Companies.Where(c => c.Name.ToLower().Contains(companyName.ToLower())).ToListAsync();
 
         public async Task<IEnumerable<Company>> GetByGroupId(int companyGroupId)
-        {
-            var companies = await _kasaDbContext.Companies.Where(c => c.CompanyGroupId == companyGroupId).ToListAsync();
-            return companies;
-        }
+            => await _kasaDbContext.Companies.Where(c => c.CompanyGroupId == companyGroupId).ToListAsync();
     }
 }

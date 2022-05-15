@@ -8,6 +8,6 @@ namespace Kasa.Core.Repositories
         Task Remove(int id);
         Task Update(BankAccount bankAccount);
         Task<BankAccount> GetById(int id);
-        Task<IEnumerable<BankAccount>> GetBankAccounts(int sourceId, AccountOwner accountOwner);
+        Task<IEnumerable<BankAccount>> GetBankAccounts(int sourceId, AccountOwnerType accountOwnerType);
     }
 }

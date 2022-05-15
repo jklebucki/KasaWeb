@@ -12,7 +12,7 @@ namespace Kasa.Infrastructure.Repositories
 
         public LocationRepository(KasaDbContext kasaDbContext)
         {
-            _kasaDbContext = kasaDbContext;
+            _kasaDbContext = kasaDbContext ?? throw new ArgumentNullException(nameof(kasaDbContext));
         }
 
         public async Task<int> Add(Location location)
@@ -32,14 +32,12 @@ namespace Kasa.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Location>> GetByName(string companyName)
-        {
-            return await _kasaDbContext.Locations.Where(l => l.Name.ToLower().Contains(companyName.ToLower())).ToListAsync();
-        }
+            => await _kasaDbContext.Locations.Where(l => l.Name.ToLower().Contains(companyName.ToLower())).ToListAsync();
+
 
         public async Task<IEnumerable<Location>> GetComapnyLocations(int companyId)
-        {
-            return await _kasaDbContext.Locations.Where(l => l.CompanyId == companyId).ToListAsync();
-        }
+            => await _kasaDbContext.Locations.Where(l => l.CompanyId == companyId).ToListAsync();
+
 
         public async Task Remove(int id)
         {

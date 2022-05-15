@@ -12,17 +12,17 @@ namespace Kasa.Infrastructure.Repositories
 
         public BankAccountRepository(KasaDbContext kasaDbContext)
         {
-            _kasaDbContext = kasaDbContext;
+            _kasaDbContext = kasaDbContext ?? throw new ArgumentNullException(nameof(kasaDbContext));
         }
 
         public async Task<int> Add(BankAccount bankAccount)
         {
             switch (bankAccount.AccountOwner)
             {
-                case AccountOwner.Location:
+                case AccountOwnerType.Location:
                     await RepositoryCommon.CheckIfLocationExist(_kasaDbContext, bankAccount.SourceId);
                     break;
-                case AccountOwner.Contractor:
+                case AccountOwnerType.Contractor:
                     await RepositoryCommon.CheckIfContractorExist(_kasaDbContext, bankAccount.SourceId);
                     break;
                 default:
@@ -42,10 +42,8 @@ namespace Kasa.Infrastructure.Repositories
                 throw new Exception($"Bank account with ID: {id} does not exist.");
         }
 
-        public async Task<IEnumerable<BankAccount>> GetBankAccounts(int sourceId, AccountOwner accountOwner)
-        {
-            return await _kasaDbContext.BankAccounts.Where(c => c.SourceId == sourceId && c.AccountOwner == accountOwner).ToListAsync();
-        }
+        public async Task<IEnumerable<BankAccount>> GetBankAccounts(int sourceId, AccountOwnerType accountOwnerType)
+            => await _kasaDbContext.BankAccounts.Where(c => c.SourceId == sourceId && c.AccountOwner == accountOwnerType).ToListAsync();
 
         public async Task Remove(int id)
         {

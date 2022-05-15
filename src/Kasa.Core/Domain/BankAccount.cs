@@ -2,11 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Kasa.Core.Domain
 {
-    public enum AccountOwner { Location = 1, Contractor = 2 }
+    public enum AccountOwnerType { Location = 1, Contractor = 2 }
     public class BankAccount : Entity
     {
         public int SourceId { get; protected set; }
-        public AccountOwner AccountOwner { get; protected set; }
+        public AccountOwnerType AccountOwner { get; protected set; }
         [MaxLength(200)]
         [Required]
         public string BankName { get; protected set; }
@@ -15,10 +15,10 @@ namespace Kasa.Core.Domain
         public string BankAccountNumber { get; protected set; }
         private BankAccount() { }
 
-        public BankAccount(int sourceId, AccountOwner accountOwner, string bankName, string bankAccountNumber)
+        public BankAccount(int sourceId, AccountOwnerType accountOwnerType, string bankName, string bankAccountNumber)
         {
             SetSourceId(sourceId);
-            SetAccountOwner(accountOwner);
+            SetAccountOwner(accountOwnerType);
             SetName(bankName);
             SetBankAccount(bankAccountNumber);
             SetCreatedAt();
@@ -29,9 +29,9 @@ namespace Kasa.Core.Domain
             SourceId = sourceId;
         }
 
-        private void SetAccountOwner(AccountOwner accountOwner)
+        private void SetAccountOwner(AccountOwnerType accountOwnerType)
         {
-            AccountOwner = accountOwner;
+            AccountOwner = accountOwnerType;
         }
 
         private void SetName(string bankName)
@@ -44,10 +44,10 @@ namespace Kasa.Core.Domain
             BankAccountNumber = bankAccount;
         }
 
-        public void Update(int sourceId, AccountOwner accountOwner, string bankName, string bankAccount)
+        public void Update(int sourceId, AccountOwnerType accountOwnerType, string bankName, string bankAccount)
         {
             SetSourceId(sourceId);
-            SetAccountOwner(accountOwner);
+            SetAccountOwner(accountOwnerType);
             SetName(bankName);
             SetBankAccount(bankAccount);
             SetUpdatedAt();

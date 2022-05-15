@@ -71,6 +71,8 @@ namespace Kasa.Core.Domain
 
         private void SetIsCurrency(bool isCurrecy)
         {
+            if (!isCurrecy)
+                IsFifo = false;
             IsCurrecy = isCurrecy;
         }
 

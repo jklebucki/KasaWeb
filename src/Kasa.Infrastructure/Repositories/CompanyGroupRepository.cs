@@ -11,7 +11,7 @@ namespace Kasa.Infrastructure.Repositories
 
         public CompanyGroupRepository(KasaDbContext kasaDbContext)
         {
-            _kasaDbContext = kasaDbContext;
+            _kasaDbContext = kasaDbContext ?? throw new ArgumentNullException(nameof(kasaDbContext));
         }
 
         public async Task<int> Add(CompanyGroup companyGroup)
@@ -72,10 +72,6 @@ namespace Kasa.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<CompanyGroup>> GetByName(string companyGroupName)
-        {
-            var companyGroups = await _kasaDbContext.CompanyGroups.Where(c => c.GroupName.ToLower().Contains(companyGroupName.ToLower())).ToListAsync();
-            return companyGroups;
-        }
-
+            => await _kasaDbContext.CompanyGroups.Where(c => c.GroupName.ToLower().Contains(companyGroupName.ToLower())).ToListAsync();
     }
 }

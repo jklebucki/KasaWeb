@@ -11,7 +11,7 @@ namespace Kasa.Infrastructure.Repositories
         private readonly KasaDbContext _kasaDbContext;
         public UserRepository(KasaDbContext kasaDbContext)
         {
-            _kasaDbContext = kasaDbContext;
+            _kasaDbContext = kasaDbContext ?? throw new ArgumentNullException(nameof(kasaDbContext));
         }
         public async Task<int> AddAsync(User user)
         {
@@ -52,14 +52,10 @@ namespace Kasa.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<User>> GetByEmailAsync(string email)
-        {
-            return await _kasaDbContext.Users.Where(c => c.Email.Contains(email)).ToListAsync();
-        }
+            => await _kasaDbContext.Users.Where(c => c.Email.Contains(email)).ToListAsync();
 
         public async Task<IEnumerable<User>> GetByCompanyGroupAsync(int companyId)
-        {
-            return await _kasaDbContext.Users.Where(c => c.CompanyGroupId == companyId).ToListAsync();
-        }
+            => await _kasaDbContext.Users.Where(c => c.CompanyGroupId == companyId).ToListAsync();
 
         public async Task UpdateAsync(User user)
         {
