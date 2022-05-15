@@ -1,5 +1,5 @@
-using System.ComponentModel.DataAnnotations;
 using Kasa.Core.Extensions;
+using System.ComponentModel.DataAnnotations;
 namespace Kasa.Core.Domain
 {
     public class User : Entity

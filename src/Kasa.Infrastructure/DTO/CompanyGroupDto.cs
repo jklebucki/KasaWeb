@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Kasa.Infrastructure.DTO
+﻿namespace Kasa.Infrastructure.DTO
 {
     public class CompanyGroupDto
     {
