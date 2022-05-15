@@ -30,45 +30,42 @@ namespace Kasa.Infrastructure.Repositories
         public async Task Remove(int id)
         {
             var companyGroup = await _kasaDbContext.CompanyGroups.FirstOrDefaultAsync(c => c.Id == id);
-            if (companyGroup != null)
-                try
-                {
-                    _kasaDbContext.CompanyGroups.Remove(companyGroup);
-                    await _kasaDbContext.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
-                }
-            else
+            if (companyGroup == null)
                 throw new Exception($"Company group with ID: {id} does not exist.");
+            try
+            {
+                _kasaDbContext.CompanyGroups.Remove(companyGroup);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
+            }
         }
 
         public async Task Update(CompanyGroup companyGroup)
         {
             var companyGropupToUpdate = await _kasaDbContext.CompanyGroups.FirstOrDefaultAsync(c => c.Id == companyGroup.Id);
-            if (companyGropupToUpdate != null)
-                try
-                {
-                    companyGropupToUpdate.Update(companyGroup.GroupName);
-                    _kasaDbContext.Update(companyGropupToUpdate);
-                    await _kasaDbContext.SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
-                }
-            else
+            if (companyGropupToUpdate == null)
                 throw new Exception($"Company group with ID: {companyGroup.Id} does not exist.");
+            try
+            {
+                companyGropupToUpdate.Update(companyGroup.GroupName);
+                _kasaDbContext.Update(companyGropupToUpdate);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
+            }
         }
 
         public async Task<CompanyGroup> GetById(int id)
         {
             var companyGroup = await _kasaDbContext.CompanyGroups.FirstOrDefaultAsync(c => c.Id == id);
-            if (companyGroup != null)
-                return companyGroup;
-            else
+            if (companyGroup == null)
                 throw new Exception($"Company group with ID: {id} does not exist.");
+            return companyGroup;
         }
 
         public async Task<IEnumerable<CompanyGroup>> GetByName(string companyGroupName)

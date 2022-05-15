@@ -34,14 +34,31 @@ namespace Kasa.Infrastructure.Repositories
         public async Task<IEnumerable<CashPoint>> GetLocationCashPoints(int locationId)
             => await _kasaDbContext.CashPoints.Where(c => c.LocationId == locationId).ToListAsync();
 
-        public Task Remove(int id)
+        public async Task Remove(int id)
         {
-            throw new NotImplementedException();
+            var cashPointToRemove = await _kasaDbContext.CashPoints.FirstOrDefaultAsync(_ => _.Id == id);
+            if (cashPointToRemove == null)
+                throw new Exception($"Cash point with ID {id} does not exist.");
+            _kasaDbContext.Remove(cashPointToRemove);
+            await _kasaDbContext.SaveChangesAsync();
         }
 
-        public Task Update(CashPoint cashPoint)
+        public async Task Update(CashPoint cashPoint)
         {
-            throw new NotImplementedException();
+            await RepositoryCommon.CheckIfLocationExist(_kasaDbContext, cashPoint.LocationId);
+            var cashPointToUpdate = await _kasaDbContext.CashPoints.FirstOrDefaultAsync(c => c.Id == cashPoint.LocationId);
+            if (cashPointToUpdate == null)
+                throw new Exception($"Cash point with ID: {cashPoint.Id} does not exist.");
+            try
+            {
+                cashPointToUpdate.Update(cashPoint.Name, cashPoint.DocumentSymbol, cashPoint.IsFifo, cashPoint.IsCurrecy, cashPoint.AccountingAccountNumber);
+                _kasaDbContext.Update(cashPointToUpdate);
+                await _kasaDbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.InnerException != null ? ex.InnerException?.Message : ex.Message);
+            }
         }
     }
 }

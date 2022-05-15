@@ -42,36 +42,30 @@ namespace Kasa.Infrastructure.Repositories
         public async Task Remove(int id)
         {
             var locationToRemove = await _kasaDbContext.Locations.FirstOrDefaultAsync(_ => _.Id == id);
-            if (locationToRemove != null)
-            {
-                _kasaDbContext.Locations.Remove(locationToRemove);
-                await _kasaDbContext.SaveChangesAsync();
-            }
-            else
+            if (locationToRemove == null)
                 throw new Exception($"Location with ID {id} does not exist.");
+            _kasaDbContext.Locations.Remove(locationToRemove);
+            await _kasaDbContext.SaveChangesAsync();
         }
 
         public async Task Update(Location location)
         {
             var locationToUpdate = await _kasaDbContext.Locations.FirstOrDefaultAsync(_ => _.Id == location.Id);
-            if (locationToUpdate != null)
-            {
-                locationToUpdate.Update(location.CompanyId,
-                                        location.Name,
-                                        location.Description,
-                                        location.Street,
-                                        location.Place,
-                                        location.ZipCode,
-                                        location.Province,
-                                        location.Country,
-                                        location.LocationEmail,
-                                        location.LocationPhone,
-                                        location.DocumentSeries);
-                _kasaDbContext.Locations.Update(locationToUpdate);
-                await _kasaDbContext.SaveChangesAsync();
-            }
-            else
+            if (locationToUpdate == null)
                 throw new Exception($"Location with ID {location.Id} does not exist.");
+            locationToUpdate.Update(location.CompanyId,
+                                    location.Name,
+                                    location.Description,
+                                    location.Street,
+                                    location.Place,
+                                    location.ZipCode,
+                                    location.Province,
+                                    location.Country,
+                                    location.LocationEmail,
+                                    location.LocationPhone,
+                                    location.DocumentSeries);
+            _kasaDbContext.Locations.Update(locationToUpdate);
+            await _kasaDbContext.SaveChangesAsync();
         }
     }
 }
