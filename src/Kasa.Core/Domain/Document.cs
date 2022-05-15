@@ -8,8 +8,10 @@ namespace Kasa.Core.Domain
         public DateTime DocumentDate { get; protected set; }
         public int DocumentNumber { get; protected set; }
         [MaxLength(15)]
+        [Required]
         public string DocumentSeries { get; protected set; }
         [MaxLength(8)]
+        [Required]
         public string CurrencyDesignation { get; protected set; }
         public CashOperationType CashOperationType { get; protected set; }
         public decimal Sum { get; protected set; }
@@ -65,16 +67,22 @@ namespace Kasa.Core.Domain
 
         private void SetDocumentNumber(int documentNumber)
         {
+            if(documentNumber < 0)
+                throw new Exception("The document number cannot be less than zero.");
             DocumentNumber = documentNumber;
         }
 
         private void SetDocumentSeries(string documentSeries)
         {
+            if(string.IsNullOrWhiteSpace(documentSeries))
+                throw new Exception("The document series cannot be empty.");
             DocumentSeries = documentSeries;
         }
 
         private void SetCurrencyDesignation(string currencyDesignation)
         {
+            if (string.IsNullOrWhiteSpace(currencyDesignation))
+                throw new Exception("The currency designation cannot be empty.");
             CurrencyDesignation = currencyDesignation;
         }
 
@@ -85,6 +93,8 @@ namespace Kasa.Core.Domain
 
         private void SetSum(decimal sum)
         {
+            if (sum < 0)
+                throw new Exception("The sum of the document cannot be less than zero.");
             Sum = sum;
         }
 

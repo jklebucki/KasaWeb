@@ -8,6 +8,7 @@ namespace Kasa.Core.Domain
         public int? ContractorErpId { get; set; }
         public int? ContractorErpPosition { get; set; }
         [MaxLength(200)]
+        [Required]
         public string Name { get; set; }
         [MaxLength(200)]
         public string Street { get; set; }
@@ -81,6 +82,8 @@ namespace Kasa.Core.Domain
 
         private void SetName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new Exception("The contractor name cannot be empty.");
             Name = name;
         }
 

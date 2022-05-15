@@ -8,8 +8,10 @@ namespace Kasa.Core.Domain
         public int SourceId { get; protected set; }
         public AccountOwner AccountOwner { get; protected set; }
         [MaxLength(200)]
+        [Required]
         public string BankName { get; protected set; }
         [MaxLength(50)]
+        [Required]
         public string BankAccountNumber { get; protected set; }
         private BankAccount() { }
 

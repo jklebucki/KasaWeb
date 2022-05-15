@@ -5,12 +5,15 @@ namespace Kasa.Core.Domain
     public class CashPoint : Entity
     {
         [MaxLength(200)]
+        [Required]
         public string Name { get; protected set; }
         [MaxLength(20)]
+        [Required]
         public string DocumentSymbol { get; protected set; }
         public bool IsFifo { get; protected set; }
         public bool IsCurrecy { get; protected set; }
         [MaxLength(100)]
+        [Required]
         public string AccountingAccountNumber { get; protected set; }
 
         public int LocationId { get; set; }
@@ -49,11 +52,15 @@ namespace Kasa.Core.Domain
 
         private void SetName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new Exception("The name cannot be empty.");
             Name = name;
         }
 
         private void SetDocumentSymbol(string documentSymbol)
         {
+            if (string.IsNullOrWhiteSpace(documentSymbol))
+                throw new Exception("The document symbol cannot be empty.");
             DocumentSymbol = documentSymbol;
         }
 
@@ -69,6 +76,8 @@ namespace Kasa.Core.Domain
 
         private void SetAccountingAccountNumber(string accountingAccountNumber)
         {
+            if (string.IsNullOrWhiteSpace(accountingAccountNumber))
+                throw new Exception("The accounting account number cannot be empty.");
             AccountingAccountNumber = accountingAccountNumber;
         }
     }

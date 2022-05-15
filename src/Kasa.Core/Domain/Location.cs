@@ -5,6 +5,7 @@ namespace Kasa.Core.Domain
     public class Location : Entity
     {
         [MaxLength(200)]
+        [Required]
         public string Name { get; protected set; }
         [MaxLength(200)]
         public string Description { get; protected set; }
@@ -90,6 +91,8 @@ namespace Kasa.Core.Domain
 
         private void SetName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new Exception("The location name cannot be empty.");
             Name = name;
         }
 

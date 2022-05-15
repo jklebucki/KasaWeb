@@ -6,6 +6,7 @@ namespace Kasa.Core.Domain
     public class Company : Entity
     {
         [MaxLength(200)]
+        [Required]
         public string Name { get; protected set; }
         [MaxLength(200)]
         public string Description { get; protected set; }
@@ -81,6 +82,8 @@ namespace Kasa.Core.Domain
         }
         private void SetName(string name)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                throw new Exception("The company name cannot be empty.");
             Name = name;
         }
         private void SetDescription(string description)

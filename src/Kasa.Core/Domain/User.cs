@@ -14,8 +14,10 @@ namespace Kasa.Core.Domain
         [MaxLength(100)]
         public string? LastName { get; protected set; }
         [MaxLength(100)]
+        [Required]
         public string Email { get; protected set; }
         [MaxLength(100)]
+        [Required]
         public string Password { get; protected set; }
         private User() { }
         public User(int companyGroupId,

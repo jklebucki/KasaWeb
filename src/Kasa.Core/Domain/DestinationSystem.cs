@@ -5,10 +5,13 @@ namespace Kasa.Core.Domain
     public class DestinationSystem : Entity
     {
         [MaxLength(200)]
+        [Required]
         public string DestinationName { get; set; }
         [MaxLength(200)]
+        [Required]
         public string DestinationSystemType { get; set; }
         [MaxLength(200)]
+        [Required]
         public string DestinationSystemLocation { get; set; }
         [MaxLength(200)]
         public string DestinationSystemDatabase { get; set; }

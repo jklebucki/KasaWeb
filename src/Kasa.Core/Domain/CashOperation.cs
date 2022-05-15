@@ -2,10 +2,11 @@
 
 namespace Kasa.Core.Domain
 {
-    public enum CashOperationType { BO = 0, KP = 1, KW = -1 }
+    public enum CashOperationType { BO, KP, KW }
     public class CashOperation : Entity
     {
         [MaxLength(200)]
+        [Required]
         public string Name { get; protected set; }
         public CashOperationType OperationType { get; protected set; }
         [MaxLength(100)]
@@ -46,6 +47,8 @@ namespace Kasa.Core.Domain
 
         private void SetName(string name)
         {
+            if(string.IsNullOrEmpty(name))
+                throw new Exception("The operation name cannot be empty.");
             Name = name;
         }
 
